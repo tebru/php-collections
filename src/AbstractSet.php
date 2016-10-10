@@ -35,4 +35,24 @@ abstract class AbstractSet extends AbstractCollection implements SetInterface
 
         return true;
     }
+
+    /**
+     * Adds any elements from specified collection that do not already exist
+     *
+     * By default this method will use strict comparison checking, passing false
+     * in will use a double equals (==) instead.
+     *
+     * @param CollectionInterface $collection
+     * @param bool $strict
+     * @return bool
+     */
+    public function addAll(CollectionInterface $collection, bool $strict = true): bool
+    {
+        $size = $this->count();
+        foreach ($collection as $element) {
+            $this->add($element, $strict);
+        }
+
+        return $size !== $this->count();
+    }
 }
