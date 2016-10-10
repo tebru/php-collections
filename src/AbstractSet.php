@@ -28,7 +28,7 @@ abstract class AbstractSet extends AbstractCollection implements SetInterface
     public function add($element, bool $strict = true): bool
     {
         if ($this->contains($element, $strict)) {
-            return true;
+            return false;
         }
 
         parent::add($element);
