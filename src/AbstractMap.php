@@ -6,7 +6,9 @@
 
 namespace Tebru\DataStructure;
 
+use ArrayIterator;
 use OutOfRangeException;
+use Traversable;
 
 /**
  * Class AbstractMap
@@ -190,6 +192,16 @@ abstract class AbstractMap implements MapInterface
         $collection->addAll(new ArrayList($values));
 
         return $collection;
+    }
+
+    /**
+     * Retrieve an external iterator
+     *
+     * @return Traversable
+     */
+    public function getIterator()
+    {
+        return new ArrayIterator($this->mappings);
     }
 
     /**

@@ -7,6 +7,7 @@
 namespace Tebru\DataStructure;
 
 use Countable;
+use IteratorAggregate;
 
 /**
  * Interface MapInterface
@@ -15,7 +16,7 @@ use Countable;
  *
  * @author Nate Brunette <n@tebru.net>
  */
-interface MapInterface extends Countable
+interface MapInterface extends IteratorAggregate, Countable
 {
     /**
      * Removes all mappings from map
