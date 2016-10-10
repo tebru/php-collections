@@ -1,0 +1,15 @@
+{
+    "name": "tebru/php-data-structures",
+    "description": "Data structures for PHP based on Java",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nate Brunette",
+            "email": "n@tebru.net"
+        }
+    ],
+    "require": {
+        "php": ">= 7.0"
+    }
+}
