@@ -8,6 +8,7 @@ namespace Tebru\DataStructure;
 
 use Countable;
 use IteratorAggregate;
+use Traversable;
 
 /**
  * Interface MapInterface
@@ -100,13 +101,6 @@ interface MapInterface extends IteratorAggregate, Countable
     public function putAll(MapInterface $map);
 
     /**
-     * Returns the number of mappings in the map
-     *
-     * @return int
-     */
-    public function count(): int;
-
-    /**
      * Returns the values as a collection
      *
      * If a collection is passed in, that collection will be populated, otherwise
@@ -116,4 +110,18 @@ interface MapInterface extends IteratorAggregate, Countable
      * @return CollectionInterface
      */
     public function values(CollectionInterface $collection = null): CollectionInterface;
+
+    /**
+     * Retrieve an external iterator
+     *
+     * @return Traversable
+     */
+    public function getIterator(): Traversable;
+
+    /**
+     * Returns the number of mappings in the map
+     *
+     * @return int
+     */
+    public function count(): int;
 }

@@ -212,7 +212,7 @@ abstract class AbstractCollection implements CollectionInterface
      *
      * @return Traversable
      */
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return new ArrayIterator($this->elements);
     }

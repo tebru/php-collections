@@ -199,7 +199,7 @@ abstract class AbstractMap implements MapInterface
      *
      * @return Traversable
      */
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return new ArrayIterator($this->mappings);
     }

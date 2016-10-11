@@ -8,6 +8,7 @@ namespace Tebru\DataStructure;
 
 use Countable;
 use IteratorAggregate;
+use Traversable;
 
 /**
  * Interface CollectionInterface
@@ -117,16 +118,23 @@ interface CollectionInterface extends IteratorAggregate, Countable
     public function retainAll(CollectionInterface $collection, bool $strict = true): bool;
 
     /**
-     * Returns the size of the collection
-     *
-     * @return int
-     */
-    public function count(): int;
-
-    /**
      * Returns an array of all elements in the collection
      *
      * @return array
      */
     public function toArray(): array;
+
+    /**
+     * Retrieve an external iterator
+     *
+     * @return Traversable
+     */
+    public function getIterator(): Traversable;
+
+    /**
+     * Returns the size of the collection
+     *
+     * @return int
+     */
+    public function count(): int;
 }
