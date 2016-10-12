@@ -65,9 +65,9 @@ class ArrayList extends AbstractList
      */
     public function remove($element, bool $strict = true): bool
     {
-        $index = array_search($element, $this->elements, $strict);
+        $index = $this->indexOf($element, $strict);
 
-        if (false === $index) {
+        if (-1 === $index) {
             return false;
         }
 
@@ -138,7 +138,9 @@ class ArrayList extends AbstractList
      */
     public function insert(int $index, $element)
     {
-        $this->assertIndex($index);
+        if ($index < 0 || $index > $this->count()) {
+            throw new OutOfBoundsException(sprintf('Element unable to be inserted at index "%s"', $index));
+        }
 
         array_splice($this->elements, $index, 0, [$element]);
     }
@@ -153,7 +155,9 @@ class ArrayList extends AbstractList
      */
     public function insertAll(int $index, CollectionInterface $collection): bool
     {
-        $this->assertIndex($index);
+        if ($index < 0 || $index > $this->count()) {
+            throw new OutOfBoundsException(sprintf('Elements unable to be inserted at index "%s"', $index));
+        }
 
         $size = $this->count();
         array_splice($this->elements, $index, 0, $collection->toArray());
@@ -170,7 +174,9 @@ class ArrayList extends AbstractList
      */
     public function get(int $index)
     {
-        $this->assertIndex($index);
+        if (!$this->has($index)) {
+            throw new OutOfBoundsException(sprintf('Tried to access element at index "%s"', $index));
+        }
 
         return $this->elements[$index];
     }
@@ -221,7 +227,8 @@ class ArrayList extends AbstractList
 
         $index = array_search($element, $elements, $strict);
 
-        return false === $index ? -1 : $index;
+        // return -1 if not found or (size - index found - 1) to return the index of the element after reverse
+        return false === $index ? -1 : $this->count() - $index - 1;
     }
 
     /**
@@ -253,7 +260,15 @@ class ArrayList extends AbstractList
      */
     public function set(int $index, $element)
     {
-        $oldElement = $this->get($index);
+        if ($index < 0 || $index > $this->count()) {
+            throw new OutOfBoundsException(sprintf('Element unable to be set at index "%s"', $index));
+        }
+
+        $oldElement = null;
+        if ($this->has($index)) {
+            $oldElement = $this->get($index);
+        }
+
         $this->elements[$index] = $element;
 
         return $oldElement;
@@ -266,25 +281,16 @@ class ArrayList extends AbstractList
      * @param int $fromIndex
      * @param int $toIndex
      * @return ListInterface
+     * @throws \OutOfBoundsException If to or from index does not exist
      */
     public function subList(int $fromIndex, int $toIndex): ListInterface
     {
+        if (!$this->has($fromIndex) || !$this->has($toIndex - 1)) {
+            throw new OutOfBoundsException('Unable to create sub list as $toIndex or $fromIndex do not exist in list');
+        }
+
         $newList = array_slice($this->elements, $fromIndex, $toIndex - $fromIndex);
 
         return new ArrayList($newList);
-    }
-
-    /**
-     * Ensure that the index exists
-     *
-     * @param int $index
-     * @return void
-     * @throws OutOfBoundsException if the index doesn't exist
-     */
-    protected function assertIndex(int $index)
-    {
-        if (!$this->has($index)) {
-            throw new OutOfBoundsException(sprintf('Tried to access element at index "%s"', $index));
-        }
     }
 }
