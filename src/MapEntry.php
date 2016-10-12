@@ -7,12 +7,18 @@
 namespace Tebru\DataStructure;
 
 /**
- * Class AbstractSet
- *
- * Default implementation of the [@see SetInterface]
+ * Class MapEntry
  *
  * @author Nate Brunette <n@tebru.net>
  */
-abstract class AbstractSet extends AbstractCollection implements SetInterface
+class MapEntry
 {
+    public $key;
+    public $value;
+
+    public function __construct($key, $value)
+    {
+        $this->key = $key;
+        $this->value = $value;
+    }
 }

@@ -8,7 +8,6 @@ namespace Tebru\DataStructure;
 
 use Countable;
 use IteratorAggregate;
-use Traversable;
 
 /**
  * Interface CollectionInterface
@@ -63,10 +62,14 @@ interface CollectionInterface extends IteratorAggregate, Countable
     /**
      * Returns true if the collection contains all elements from another collection
      *
+     * By default this method will use strict comparison checking, passing false
+     * in will use a double equals (==) instead.
+     *
      * @param CollectionInterface $collection
+     * @param bool $strict
      * @return bool
      */
-    public function containsAll(CollectionInterface $collection): bool;
+    public function containsAll(CollectionInterface $collection, bool $strict = true): bool;
 
     /**
      * Returns true if the collection is empty
@@ -123,13 +126,6 @@ interface CollectionInterface extends IteratorAggregate, Countable
      * @return array
      */
     public function toArray(): array;
-
-    /**
-     * Retrieve an external iterator
-     *
-     * @return Traversable
-     */
-    public function getIterator(): Traversable;
 
     /**
      * Returns the size of the collection

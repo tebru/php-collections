@@ -7,8 +7,6 @@
 namespace Tebru\DataStructure;
 
 use Countable;
-use IteratorAggregate;
-use Traversable;
 
 /**
  * Interface MapInterface
@@ -17,7 +15,7 @@ use Traversable;
  *
  * @author Nate Brunette <n@tebru.net>
  */
-interface MapInterface extends IteratorAggregate, Countable
+interface MapInterface extends Countable
 {
     /**
      * Removes all mappings from map
@@ -29,10 +27,14 @@ interface MapInterface extends IteratorAggregate, Countable
     /**
      * Returns true if the key exists in the map
      *
-     * @param string $key
+     * By default this method will use strict comparison checking, passing false
+     * in will use a double equals (==) instead.
+     *
+     * @param mixed $key
+     * @param bool $strict
      * @return bool
      */
-    public function containsKey(string $key): bool;
+    public function containsKey($key, bool $strict = true): bool;
 
     /**
      * Returns true if the value exists in the map
@@ -60,10 +62,14 @@ interface MapInterface extends IteratorAggregate, Countable
     /**
      * Get the value at the specified key
      *
-     * @param string $key
+     * By default this method will use strict comparison checking, passing false
+     * in will use a double equals (==) instead.
+     *
+     * @param mixed $key
+     * @param bool $strict
      * @return mixed
      */
-    public function get(string $key);
+    public function get($key, bool $strict = true);
 
     /**
      * Returns true if the map is empty
@@ -86,11 +92,11 @@ interface MapInterface extends IteratorAggregate, Countable
     /**
      * Returns the previous value or null if there was no value
      *
-     * @param string $key
+     * @param mixed $key
      * @param mixed $value
      * @return mixed
      */
-    public function put(string $key, $value);
+    public function put($key, $value);
 
     /**
      * Adds all the mappings from specified map to this map
@@ -99,6 +105,19 @@ interface MapInterface extends IteratorAggregate, Countable
      * @return void
      */
     public function putAll(MapInterface $map);
+
+    /**
+     * Remove the mapping for the key and returns the previous value
+     * or null
+     *
+     * By default this method will use strict comparison checking, passing false
+     * in will use a double equals (==) instead.
+     *
+     * @param mixed $key
+     * @param bool $strict
+     * @return mixed
+     */
+    public function remove($key, bool $strict = true);
 
     /**
      * Returns the values as a collection
@@ -110,13 +129,6 @@ interface MapInterface extends IteratorAggregate, Countable
      * @return CollectionInterface
      */
     public function values(CollectionInterface $collection = null): CollectionInterface;
-
-    /**
-     * Retrieve an external iterator
-     *
-     * @return Traversable
-     */
-    public function getIterator(): Traversable;
 
     /**
      * Returns the number of mappings in the map
