@@ -1,5 +1,9 @@
 PHP Collections
 ===============
+[![Build Status](https://travis-ci.org/tebru/php-collections.svg?branch=master)](https://travis-ci.org/tebru/php-collections)
+[![Code Coverage](https://scrutinizer-ci.com/g/tebru/php-collections/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/tebru/php-collections/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/tebru/php-collections/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/tebru/php-collections/?branch=master)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/0be91355-28b0-4293-976f-5d27c9ce0c90/mini.png)](https://insight.sensiolabs.com/projects/0be91355-28b0-4293-976f-5d27c9ce0c90)
 
 This library ports the Java Collections Framework to PHP.
 
