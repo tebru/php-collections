@@ -1,6 +1,6 @@
 {
     "name": "tebru/php-data-structures",
-    "description": "Data structures for PHP based on Java",
+    "description": "Data structures for PHP based on Java Collection Framework",
     "type": "library",
     "license": "MIT",
     "authors": [
