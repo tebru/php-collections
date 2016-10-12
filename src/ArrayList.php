@@ -41,10 +41,14 @@ class ArrayList extends AbstractList
      * Returns true if the collection can contain duplicates,
      * and false if it cannot.
      *
+     * By default this method will use strict comparison checking, passing false
+     * in will use a double equals (==) instead.
+     *
      * @param mixed $element
+     * @param bool $strict
      * @return bool
      */
-    public function add($element): bool
+    public function add($element, bool $strict = true): bool
     {
         $this->elements[] = $element;
 

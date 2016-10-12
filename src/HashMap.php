@@ -104,7 +104,7 @@ class HashMap extends AbstractMap
      */
     public function get($key, bool $strict = true)
     {
-        if (!$this->containsKey($key)) {
+        if (!$this->containsKey($key, $strict)) {
             throw new OutOfRangeException(sprintf('Tried to access array at key "%s"', $key));
         }
 
@@ -135,7 +135,7 @@ class HashMap extends AbstractMap
     public function keySet(SetInterface $set = null): SetInterface
     {
         if (null === $set) {
-            return new HashSet($this->keys);
+            return new HashSet(new ArrayList($this->keys));
         }
 
         $set->addAll(new ArrayList($this->keys));
@@ -198,6 +198,23 @@ class HashMap extends AbstractMap
     public function count(): int
     {
         return count($this->keys);
+    }
+
+    /**
+     * Returns the keys as a collection
+     *
+     * @param CollectionInterface $collection
+     * @return CollectionInterface
+     */
+    public function keys(CollectionInterface $collection = null): CollectionInterface
+    {
+        if (null === $collection) {
+            return new ArrayList($this->keys);
+        }
+
+        $collection->addAll(new ArrayList($this->keys));
+
+        return $collection;
     }
 
     /**

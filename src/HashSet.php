@@ -6,7 +6,7 @@
 
 namespace Tebru\Collection;
 
-use IteratorIterator;
+use ArrayIterator;
 
 /**
  * Class HashSet
@@ -129,17 +129,17 @@ class HashSet extends AbstractSet
      */
     public function toArray(): array
     {
-        return $this->map->keySet()->toArray();
+        return $this->map->keys()->toArray();
     }
 
     /**
      * Retrieve an external iterator
      *
-     * @return IteratorIterator
+     * @return ArrayIterator
      */
-    public function getIterator(): IteratorIterator
+    public function getIterator(): ArrayIterator
     {
-        return new IteratorIterator($this->map->entrySet());
+        return new ArrayIterator($this->map->keys()->toArray());
     }
 
     /**

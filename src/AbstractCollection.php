@@ -20,10 +20,14 @@ abstract class AbstractCollection implements CollectionInterface
      *
      * Return true if the collection has changed, and false if it hasn't
      *
+     * By default this method will use strict comparison checking, passing false
+     * in will use a double equals (==) instead.
+     *
      * @param CollectionInterface $collection
-     * @return mixed
+     * @param bool $strict
+     * @return bool|mixed
      */
-    public function addAll(CollectionInterface $collection): bool
+    public function addAll(CollectionInterface $collection, bool $strict = true): bool
     {
         $size = $this->count();
         foreach ($collection as $element) {
@@ -103,8 +107,8 @@ abstract class AbstractCollection implements CollectionInterface
     public function retainAll(CollectionInterface $collection, bool $strict = true): bool
     {
         $size = $this->count();
-        foreach ($collection as $element) {
-            if (!$this->contains($element, $strict)) {
+        foreach ($this as $element) {
+            if (!$collection->contains($element, $strict)) {
                 $this->remove($element, $strict);
             }
         }

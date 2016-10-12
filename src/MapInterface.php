@@ -120,6 +120,17 @@ interface MapInterface extends Countable
     public function remove($key, bool $strict = true);
 
     /**
+     * Returns the keys as a collection
+     *
+     * If a collection is passed in, that collection will be populated, otherwise
+     * a default collection will be used.
+     *
+     * @param CollectionInterface $collection
+     * @return CollectionInterface
+     */
+    public function keys(CollectionInterface $collection = null): CollectionInterface;
+
+    /**
      * Returns the values as a collection
      *
      * If a collection is passed in, that collection will be populated, otherwise
