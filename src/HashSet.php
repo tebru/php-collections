@@ -18,7 +18,7 @@ class HashSet extends AbstractSet
     /**
      * @var MapInterface
      */
-    private $map;
+    protected $map;
 
     /**
      * Constructor
