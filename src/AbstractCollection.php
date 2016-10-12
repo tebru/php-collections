@@ -9,7 +9,7 @@ namespace Tebru\Collection;
 /**
  * Class AbstractCollection
  *
- * Provides a default implementation of the [@see CollectionInterface]
+ * Provides a skeletal implementation of the [@see CollectionInterface]
  *
  * @author Nate Brunette <n@tebru.net>
  */

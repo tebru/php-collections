@@ -9,7 +9,7 @@ namespace Tebru\Collection;
 /**
  * Class AbstractList
  *
- * A default implementation of the [@see ListInterface]
+ * A skeletal implementation of the [@see ListInterface]
  *
  * @author Nate Brunette <n@tebru.net>
  */

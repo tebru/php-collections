@@ -9,7 +9,7 @@ namespace Tebru\Collection;
 /**
  * Class AbstractMap
  *
- * Default implementation of [@see MapInterface]
+ * A skeletal implementation of [@see MapInterface]
  *
  * @author Nate Brunette <n@tebru.net>
  */

@@ -11,11 +11,15 @@ use ArrayIterator;
 /**
  * Class HashSet
  *
+ * An [@see SetInterface] backed by a [@see HashMap]
+ *
  * @author Nate Brunette <n@tebru.net>
  */
 class HashSet extends AbstractSet
 {
     /**
+     * The data storage
+     *
      * @var MapInterface
      */
     protected $map;

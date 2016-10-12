@@ -9,7 +9,7 @@ namespace Tebru\Collection;
 /**
  * Class AbstractSet
  *
- * Default implementation of the [@see SetInterface]
+ * A skeletal implementation of the [@see SetInterface]
  *
  * @author Nate Brunette <n@tebru.net>
  */
