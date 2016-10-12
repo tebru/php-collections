@@ -4,7 +4,7 @@
  * Distributed under the MIT License (http://opensource.org/licenses/MIT)
  */
 
-namespace Tebru\DataStructure;
+namespace Tebru\Collection;
 
 use IteratorIterator;
 

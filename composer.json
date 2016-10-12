@@ -1,5 +1,5 @@
 {
-    "name": "tebru/php-data-structures",
+    "name": "tebru/php-collections",
     "description": "Data structures for PHP based on Java Collection Framework",
     "type": "library",
     "license": "MIT",
@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Tebru\\DataStructure\\": "src/"
+            "Tebru\\Collection\\": "src/"
         }
     }
 }
