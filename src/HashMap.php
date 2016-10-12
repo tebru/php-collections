@@ -146,16 +146,21 @@ class HashMap extends AbstractMap
     /**
      * Returns the previous value or null if there was no value
      *
+     * By default this method will use strict comparison checking, passing false
+     * in will use a double equals (==) instead.
+     *
      * @param mixed $key
      * @param mixed $value
+     * @param bool $strict
      * @return mixed
      * @throws \OutOfRangeException if the key doesn't exist
      */
-    public function put($key, $value)
+    public function put($key, $value, bool $strict = true)
     {
         $oldValue = null;
-        if ($this->containsKey($key)) {
-            $oldValue = $this->get($key);
+        if ($this->containsKey($key, $strict)) {
+            $oldValue = $this->get($key, $strict);
+            $this->remove($key, $strict);
         }
 
         $this->keys[] = $key;
