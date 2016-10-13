@@ -37,7 +37,7 @@ at a specific index.  By default, they add elements to the end of the list.
 ### ArrayList
 
 This is an implementation of `CollectionInterface` and `ListInterface`.
-It extends from `AbstractList` and uses and array as data storage.
+It extends from `AbstractList` and uses an array as data storage.
 
 ### AbstractSet
 
