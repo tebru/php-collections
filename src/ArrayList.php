@@ -124,7 +124,7 @@ class ArrayList extends AbstractList
      */
     public function filter(callable $filter): CollectionInterface
     {
-        return new ArrayList(array_filter($this->elements, $filter));
+        return new static(array_filter($this->elements, $filter));
     }
 
     /**
@@ -286,7 +286,7 @@ class ArrayList extends AbstractList
 
         $newList = array_slice($this->elements, $fromIndex, $toIndex - $fromIndex);
 
-        return new ArrayList($newList);
+        return new static($newList);
     }
 
     /**
