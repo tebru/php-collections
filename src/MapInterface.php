@@ -146,6 +146,28 @@ interface MapInterface extends Countable
     public function values(CollectionInterface $collection = null): CollectionInterface;
 
     /**
+     * Filter the collection using closure
+     *
+     * The closure will get passed a [@see MapEntry].  Returning true from the
+     * closure will include that entry in the new map.
+     *
+     * @param callable $filter
+     * @return MapInterface
+     */
+    public function filter(callable $filter): MapInterface;
+
+    /**
+     * Use a closure to determine existence in the map
+     *
+     * The closure will get passed a [@see MapEntry].  Returning true from the
+     * closure will return true from this method.
+     *
+     * @param callable $exists
+     * @return bool
+     */
+    public function exists(callable $exists): bool;
+
+    /**
      * Returns the number of mappings in the map
      *
      * @return int

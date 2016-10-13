@@ -7,6 +7,7 @@
 namespace Tebru\Collection\Test;
 
 use PHPUnit_Framework_TestCase;
+use stdClass;
 use Tebru\Collection\ArrayList;
 use Tebru\Collection\Bag;
 use Tebru\Collection\CollectionInterface;
@@ -135,6 +136,30 @@ class CollectionImplementationTest extends PHPUnit_Framework_TestCase
         $collection->add(1);
 
         self::assertSame([1], $collection->toArray());
+    }
+
+    /**
+     * @dataProvider getCollections
+     * @param CollectionInterface $collection
+     */
+    public function testFilter(CollectionInterface $collection)
+    {
+        $object1 = new stdClass();
+        $object1->foo = 1;
+
+        $object2 = new stdClass();
+        $object2->foo = 2;
+
+        $object3 = new stdClass();
+        $object3->foo = 3;
+
+        $collection->addAll(new ArrayList([$object1, $object2, $object3]));
+
+        $result = $collection->filter(function (stdClass $class) {
+            return 0 !== $class->foo % 2;
+        });
+
+        self::assertSame([$object1, $object3], $result->toArray());
     }
 
     /**

@@ -8,6 +8,7 @@ namespace Tebru\Collection\Test;
 
 use OutOfRangeException;
 use PHPUnit_Framework_TestCase;
+use stdClass;
 use Tebru\Collection\ArrayList;
 use Tebru\Collection\HashMap;
 use Tebru\Collection\HashSet;
@@ -346,6 +347,32 @@ class MapImplementationTest extends PHPUnit_Framework_TestCase
         $map->put('key2', 'value2');
 
         self::assertSame([1, 'value', 'value2'], $map->values($arrayList)->toArray());
+    }
+
+    /**
+     * @dataProvider getMaps
+     * @param MapInterface $map
+     */
+    public function testFilter(MapInterface $map)
+    {
+        $object1 = new stdClass();
+        $object1->foo = 1;
+
+        $object2 = new stdClass();
+        $object2->foo = 2;
+
+        $object3 = new stdClass();
+        $object3->foo = 3;
+
+        $map->put($object1, true);
+        $map->put($object2, true);
+        $map->put($object3, true);
+
+        $result = $map->filter(function (MapEntry $mapEntry) {
+            return 0 !== $mapEntry->key->foo % 2;
+        });
+
+        self::assertSame([$object1, $object3], $result->keys()->toArray());
     }
 
     public function getMaps()

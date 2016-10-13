@@ -153,7 +153,6 @@ class HashMap extends AbstractMap
      * @param mixed $value
      * @param bool $strict
      * @return mixed
-     * @throws \OutOfRangeException if the key doesn't exist
      */
     public function put($key, $value, bool $strict = true)
     {
@@ -238,4 +237,29 @@ class HashMap extends AbstractMap
 
         return $collection;
     }
+
+    /**
+     * Filter the collection using closure
+     *
+     * The closure will get passed a [@see MapEntry].  Returning true from the
+     * closure will include that entry in the new map.
+     *
+     * @param callable $filter
+     * @return MapInterface
+     */
+    public function filter(callable $filter): MapInterface
+    {
+        $map = new HashMap();
+
+        /** @var MapEntry $mapEntry */
+        foreach ($this->entrySet() as $mapEntry) {
+            if (false !== $filter($mapEntry)) {
+                $map->put($mapEntry->key, $mapEntry->value);
+            }
+        }
+
+        return $map;
+    }
+
+
 }

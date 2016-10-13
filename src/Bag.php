@@ -115,6 +115,20 @@ class Bag extends AbstractCollection
     }
 
     /**
+     * Filter the collection using closure
+     *
+     * The closure will get passed each element.  Returning true from the
+     * closure will include that element in the new collection.
+     *
+     * @param callable $filter
+     * @return CollectionInterface
+     */
+    public function filter(callable $filter): CollectionInterface
+    {
+        return new Bag(array_filter($this->elements, $filter));
+    }
+
+    /**
      * Returns the size of the collection
      *
      * @return int

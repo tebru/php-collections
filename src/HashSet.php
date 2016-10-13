@@ -137,6 +137,20 @@ class HashSet extends AbstractSet
     }
 
     /**
+     * Filter the collection using closure
+     *
+     * The closure will get passed each element.  Returning true from the
+     * closure will include that element in the new collection.
+     *
+     * @param callable $filter
+     * @return CollectionInterface
+     */
+    public function filter(callable $filter): CollectionInterface
+    {
+        return new HashSet(new ArrayList(array_filter($this->map->keys()->toArray(), $filter)));
+    }
+
+    /**
      * Retrieve an external iterator
      *
      * @return ArrayIterator

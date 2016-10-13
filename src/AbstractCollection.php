@@ -115,4 +115,24 @@ abstract class AbstractCollection implements CollectionInterface
 
         return $size !== $this->count();
     }
+
+    /**
+     * Use a closure to determine existence in the collection
+     *
+     * The closure will get passed each element.  Returning true from the
+     * closure will return true from this method.
+     *
+     * @param callable $exists
+     * @return bool
+     */
+    public function exists(callable $exists): bool
+    {
+        foreach ($this as $element) {
+            if (true === $exists($element)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

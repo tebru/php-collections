@@ -28,4 +28,25 @@ abstract class AbstractMap implements MapInterface
             $this->put($entrySet->key, $entrySet->value);
         }
     }
+
+    /**
+     * Use a closure to determine existence in the map
+     *
+     * The closure will get passed a [@see MapEntry].  Returning true from the
+     * closure will return true from this method.
+     *
+     * @param callable $exists
+     * @return bool
+     */
+    public function exists(callable $exists): bool
+    {
+        /** @var MapEntry $mapEntry */
+        foreach ($this->entrySet() as $mapEntry) {
+            if (true === $exists($mapEntry)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

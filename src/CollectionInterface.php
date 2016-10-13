@@ -136,6 +136,28 @@ interface CollectionInterface extends IteratorAggregate, Countable
     public function toArray(): array;
 
     /**
+     * Filter the collection using closure
+     *
+     * The closure will get passed each element.  Returning true from the
+     * closure will include that element in the new collection.
+     *
+     * @param callable $filter
+     * @return CollectionInterface
+     */
+    public function filter(callable $filter): CollectionInterface;
+
+    /**
+     * Use a closure to determine existence in the collection
+     *
+     * The closure will get passed each element.  Returning true from the
+     * closure will return true from this method.
+     *
+     * @param callable $exists
+     * @return bool
+     */
+    public function exists(callable $exists): bool;
+
+    /**
      * Returns the size of the collection
      *
      * @return int
