@@ -98,7 +98,7 @@ class HashMap extends AbstractMap
     {
         $hashedKey = $this->hashCode($key);
         if (!$this->containsKey($key)) {
-            throw new OutOfRangeException(sprintf('Tried to access array at key "%s"', $key));
+            throw new OutOfRangeException(sprintf('Tried to access array at key "%s"', $hashedKey));
         }
 
         return $this->values[$hashedKey];
