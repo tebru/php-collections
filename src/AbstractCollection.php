@@ -49,15 +49,13 @@ abstract class AbstractCollection implements CollectionInterface
      */
     public function containsAll(CollectionInterface $collection, bool $strict = true): bool
     {
-        $containsAll = true;
         foreach ($collection as $element) {
-            if (!$this->contains($element, $strict)) {
-                $containsAll = false;
-                break;
+            if (false === $this->contains($element, $strict)) {
+                return false;
             }
         }
 
-        return $containsAll;
+        return true;
     }
 
     /**
@@ -108,7 +106,7 @@ abstract class AbstractCollection implements CollectionInterface
     {
         $size = $this->count();
         foreach ($this as $element) {
-            if (!$collection->contains($element, $strict)) {
+            if (false === $collection->contains($element, $strict)) {
                 $this->remove($element, $strict);
             }
         }
