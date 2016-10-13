@@ -56,7 +56,7 @@ class ListImplementationTest extends PHPUnit_Framework_TestCase
      */
     public function testInsertEnd(ListInterface $list)
     {
-        $list = new ArrayList([0, 1, 2]);
+        $list->addAll(new ArrayList([0, 1, 2]));
 
         $list->insert(3, 'a');
 

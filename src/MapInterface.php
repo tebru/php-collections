@@ -27,14 +27,10 @@ interface MapInterface extends Countable
     /**
      * Returns true if the key exists in the map
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * @param mixed $key
-     * @param bool $strict
      * @return bool
      */
-    public function containsKey($key, bool $strict = true): bool;
+    public function containsKey($key): bool;
 
     /**
      * Returns true if the value exists in the map
@@ -62,14 +58,10 @@ interface MapInterface extends Countable
     /**
      * Get the value at the specified key
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * @param mixed $key
-     * @param bool $strict
      * @return mixed
      */
-    public function get($key, bool $strict = true);
+    public function get($key);
 
     /**
      * Returns true if the map is empty
@@ -92,15 +84,11 @@ interface MapInterface extends Countable
     /**
      * Returns the previous value or null if there was no value
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * @param mixed $key
      * @param mixed $value
-     * @param bool $strict
      * @return mixed
      */
-    public function put($key, $value, bool $strict = false);
+    public function put($key, $value);
 
     /**
      * Adds all the mappings from specified map to this map
@@ -114,14 +102,11 @@ interface MapInterface extends Countable
      * Remove the mapping for the key and returns the previous value
      * or null
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * @param mixed $key
      * @param bool $strict
      * @return mixed
      */
-    public function remove($key, bool $strict = true);
+    public function remove($key);
 
     /**
      * Returns the keys as a collection

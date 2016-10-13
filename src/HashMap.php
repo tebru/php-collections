@@ -43,18 +43,14 @@ class HashMap extends AbstractMap
     }
 
     /**
-     * Returns true if the key exists in the map
-     *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
+     * Returns true if the key exists in the lookup table
      *
      * @param mixed $key
-     * @param bool $strict
      * @return bool
      */
-    public function containsKey($key, bool $strict = true): bool
+    public function containsKey($key): bool
     {
-        return in_array($key, $this->keys, $strict);
+        return array_key_exists($this->hashCode($key), $this->keys);
     }
 
     /**
@@ -84,8 +80,8 @@ class HashMap extends AbstractMap
     public function entrySet(SetInterface $set = null): SetInterface
     {
         $set = $set ?? new HashSet();
-        foreach ($this->keys as $index => $key) {
-            $set->add(new MapEntry($key, $this->values[$index]));
+        foreach ($this->keys as $hashCode => $key) {
+            $set->add(new MapEntry($key, $this->values[$hashCode]));
         }
 
         return $set;
@@ -94,23 +90,18 @@ class HashMap extends AbstractMap
     /**
      * Get the value at the specified key
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * @param mixed $key
-     * @param bool $strict
      * @return mixed
      * @throws \OutOfRangeException if the key doesn't exist
      */
-    public function get($key, bool $strict = true)
+    public function get($key)
     {
-        if (!$this->containsKey($key, $strict)) {
+        $hashedKey = $this->hashCode($key);
+        if (!$this->containsKey($key)) {
             throw new OutOfRangeException(sprintf('Tried to access array at key "%s"', $key));
         }
 
-        $index = array_search($key, $this->keys, $strict);
-
-        return $this->values[$index];
+        return $this->values[$hashedKey];
     }
 
     /**
@@ -146,24 +137,21 @@ class HashMap extends AbstractMap
     /**
      * Returns the previous value or null if there was no value
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * @param mixed $key
      * @param mixed $value
-     * @param bool $strict
      * @return mixed
      */
-    public function put($key, $value, bool $strict = true)
+    public function put($key, $value)
     {
         $oldValue = null;
-        if ($this->containsKey($key, $strict)) {
-            $oldValue = $this->get($key, $strict);
-            $this->remove($key, $strict);
+        $hashedKey = $this->hashCode($key);
+        if ($this->containsKey($key)) {
+            $oldValue = $this->get($key);
+            $this->remove($hashedKey);
         }
 
-        $this->keys[] = $key;
-        $this->values[] = $value;
+        $this->keys[$hashedKey] = $key;
+        $this->values[$hashedKey] = $value;
 
         return $oldValue;
     }
@@ -172,24 +160,18 @@ class HashMap extends AbstractMap
      * Remove the mapping for the key and returns the previous value
      * or null
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * @param mixed $key
-     * @param bool $strict
      * @return mixed
      */
-    public function remove($key, bool $strict = true)
+    public function remove($key)
     {
-        if (!$this->containsKey($key, $strict)) {
+        $hashedKey = $this->hashCode($key);
+        if (!$this->containsKey($key)) {
             return false;
         }
 
-        $oldValue = $this->get($key, $strict);
-        $index = array_search($key, $this->keys, $strict);
-
-        array_splice($this->keys, $index, 1);
-        array_splice($this->values, $index, 1);
+        $oldValue = $this->get($key);
+        unset($this->keys[$hashedKey], $this->values[$hashedKey]);
 
         return $oldValue;
     }
@@ -261,5 +243,22 @@ class HashMap extends AbstractMap
         return $map;
     }
 
-
+    /**
+     * Generate a hashcode for a php value
+     *
+     * @param mixed $value
+     * @return string
+     */
+    protected function hashCode($value): string
+    {
+        $type = gettype($value);
+        switch ($type) {
+            case 'object':
+                return spl_object_hash($value);
+            case 'array';
+                return md5(serialize($value));
+            default:
+                return $type . md5($value);
+        }
+    }
 }

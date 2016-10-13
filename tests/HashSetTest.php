@@ -52,27 +52,11 @@ class HashSetTest extends PHPUnit_Framework_TestCase
         self::assertCount(3, $collection);
     }
 
-    public function testAddDuplicateFuzzy()
-    {
-        $collection = new HashSet(new ArrayList([0, 1, 2]));
-
-        self::assertFalse($collection->add(true, false));
-        self::assertCount(3, $collection);
-    }
-
     public function testAddAllDuplicates()
     {
         $collection = new HashSet(new ArrayList([0, 1, 2]));
 
         self::assertFalse($collection->addAll(new ArrayList([0, 1, 2])));
-        self::assertCount(3, $collection);
-    }
-
-    public function testAddAllDuplicatesFuzzy()
-    {
-        $collection = new HashSet(new ArrayList([0, 1, 2]));
-
-        self::assertFalse($collection->addAll(new ArrayList([false, true, 2]), false));
         self::assertCount(3, $collection);
     }
 

@@ -25,28 +25,20 @@ interface CollectionInterface extends IteratorAggregate, Countable
      * Returns true if the collection can contain duplicates,
      * and false if it cannot.
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * @param mixed $element
-     * @param bool $strict
      * @return bool
      */
-    public function add($element, bool $strict = true): bool;
+    public function add($element): bool;
 
     /**
      * Ensure all elements of a collection exists in this collection
      *
      * Return true if the collection has changed, and false if it hasn't
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * @param CollectionInterface $collection
-     * @param bool $strict
-     * @return bool|mixed
+     * @return bool
      */
-    public function addAll(CollectionInterface $collection, bool $strict = true): bool;
+    public function addAll(CollectionInterface $collection): bool;
 
     /**
      * Removes all elements from a collection
@@ -58,14 +50,10 @@ interface CollectionInterface extends IteratorAggregate, Countable
     /**
      * Returns true if the collection contains element
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * @param mixed $element
-     * @param bool $strict
      * @return bool
      */
-    public function contains($element, bool $strict = true): bool;
+    public function contains($element): bool;
 
     /**
      * Returns true if the collection contains all elements from another collection

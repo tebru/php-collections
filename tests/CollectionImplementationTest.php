@@ -51,18 +51,6 @@ class CollectionImplementationTest extends PHPUnit_Framework_TestCase
      * @dataProvider getCollections
      * @param CollectionInterface $collection
      */
-    public function testRemoveFuzzy(CollectionInterface $collection)
-    {
-        $collection->add(1);
-
-        self::assertTrue($collection->remove(true, false));
-        self::assertCount(0, $collection);
-    }
-
-    /**
-     * @dataProvider getCollections
-     * @param CollectionInterface $collection
-     */
     public function testRemoveNotFound(CollectionInterface $collection)
     {
         $collection->add(1);
@@ -103,17 +91,6 @@ class CollectionImplementationTest extends PHPUnit_Framework_TestCase
         $collection->add(1);
 
         self::assertTrue($collection->contains(1));
-    }
-
-    /**
-     * @dataProvider getCollections
-     * @param CollectionInterface $collection
-     */
-    public function testContainsFuzzy(CollectionInterface $collection)
-    {
-        $collection->add(1);
-
-        self::assertTrue($collection->contains(true, false));
     }
 
     /**

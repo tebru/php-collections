@@ -43,16 +43,12 @@ class HashSet extends AbstractSet
     /**
      * Adds the element to the collection if it doesn't exist
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * @param mixed $element
-     * @param bool $strict
      * @return bool
      */
-    public function add($element, bool $strict = true): bool
+    public function add($element): bool
     {
-        if ($this->contains($element, $strict)) {
+        if ($this->contains($element)) {
             return false;
         }
 
@@ -64,18 +60,14 @@ class HashSet extends AbstractSet
     /**
      * Adds any elements from specified collection that do not already exist
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * @param CollectionInterface $collection
-     * @param bool $strict
      * @return bool
      */
-    public function addAll(CollectionInterface $collection, bool $strict = true): bool
+    public function addAll(CollectionInterface $collection): bool
     {
         $size = $this->count();
         foreach ($collection as $element) {
-            $this->add($element, $strict);
+            $this->add($element);
         }
 
         return $size !== $this->count();
@@ -106,7 +98,7 @@ class HashSet extends AbstractSet
     public function remove($element, bool $strict = true): bool
     {
         $size = $this->map->count();
-        $this->map->remove($element, $strict);
+        $this->map->remove($element);
 
         return $size !== $this->map->count();
     }
@@ -114,16 +106,12 @@ class HashSet extends AbstractSet
     /**
      * Returns true if the collection contains element
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * @param mixed $element
-     * @param bool $strict
      * @return bool
      */
-    public function contains($element, bool $strict = true): bool
+    public function contains($element): bool
     {
-        return $this->map->containsKey($element, $strict);
+        return $this->map->containsKey($element);
     }
 
     /**

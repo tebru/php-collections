@@ -43,5 +43,21 @@ class ArrayListTest extends PHPUnit_Framework_TestCase
         self::assertCount(1, $list);
         self::assertSame('bar', $list->get(0));
     }
+
+    public function testRemoveFuzzy()
+    {
+        $collection = new ArrayList([1]);
+
+        self::assertTrue($collection->remove(true, false));
+        self::assertCount(0, $collection);
+    }
+
+    public function testRemoveAllFuzzy()
+    {
+        $collection = new ArrayList([0, 1, 2]);
+        $collection->removeAll(new ArrayList([true]), false);
+
+        self::assertSame([0, 2], $collection->toArray());
+    }
 }
 

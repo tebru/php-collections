@@ -16,24 +16,16 @@ interface SetInterface extends CollectionInterface
     /**
      * Adds the element to the collection if it doesn't exist
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * @param mixed $element
-     * @param bool $strict
      * @return bool
      */
-    public function add($element, bool $strict = true): bool;
+    public function add($element): bool;
 
     /**
      * Adds any elements from specified collection that do not already exist
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * @param CollectionInterface $collection
-     * @param bool $strict
      * @return bool
      */
-    public function addAll(CollectionInterface $collection, bool $strict = true): bool;
+    public function addAll(CollectionInterface $collection): bool;
 }

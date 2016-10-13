@@ -90,18 +90,6 @@ class AbstractCollectionTest extends PHPUnit_Framework_TestCase
      * @dataProvider getCollections
      * @param CollectionInterface $collection
      */
-    public function testRemoveAllFuzzy(CollectionInterface $collection)
-    {
-        $collection->addAll(new ArrayList([0, 1, 2]));
-        $collection->removeAll(new ArrayList([true]), false);
-
-        self::assertSame([0, 2], $collection->toArray());
-    }
-
-    /**
-     * @dataProvider getCollections
-     * @param CollectionInterface $collection
-     */
     public function testRemoveEveryElement(CollectionInterface $collection)
     {
         $collection->addAll(new ArrayList([0, 1, 2]));

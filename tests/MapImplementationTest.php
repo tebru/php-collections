@@ -63,17 +63,6 @@ class MapImplementationTest extends PHPUnit_Framework_TestCase
      * @dataProvider getMaps
      * @param MapInterface $map
      */
-    public function testContainsKeyFuzzy(MapInterface $map)
-    {
-        $map->put(1, 'value');
-
-        self::assertTrue($map->containsKey(true, false));
-    }
-
-    /**
-     * @dataProvider getMaps
-     * @param MapInterface $map
-     */
     public function testContainsValue(MapInterface $map)
     {
         $map->put('key', 'value');
@@ -154,17 +143,6 @@ class MapImplementationTest extends PHPUnit_Framework_TestCase
      * @dataProvider getMaps
      * @param MapInterface $map
      */
-    public function testGetFuzzy(MapInterface $map)
-    {
-        $map->put(1, 'value');
-
-        self::assertSame('value', $map->get(true, false));
-    }
-
-    /**
-     * @dataProvider getMaps
-     * @param MapInterface $map
-     */
     public function testGetException(MapInterface $map)
     {
         $this->expectException(OutOfRangeException::class);
@@ -236,18 +214,14 @@ class MapImplementationTest extends PHPUnit_Framework_TestCase
      * @dataProvider getMaps
      * @param MapInterface $map
      */
-    public function testPutObjectFuzzy(MapInterface $map)
+    public function testPutArray(MapInterface $map)
     {
-        $class = new \stdClass();
-        $class2 = new \stdClass();
-        $map->put($class, 'value');
-        $oldValue = $map->put($class2, 'value2', false);
+        $map->put([1], 'value');
 
         $mapEntry = $map->entrySet()->toArray()[0];
 
-        self::assertSame('value', $oldValue);
-        self::assertSame($class2, $mapEntry->key);
-        self::assertSame('value2', $mapEntry->value);
+        self::assertSame([1], $mapEntry->key);
+        self::assertSame('value', $mapEntry->value);
     }
 
     /**
@@ -271,18 +245,6 @@ class MapImplementationTest extends PHPUnit_Framework_TestCase
     {
         $map->put('key', 'value');
         $map->remove('key');
-
-        self::assertCount(0, $map);
-    }
-
-    /**
-     * @dataProvider getMaps
-     * @param MapInterface $map
-     */
-    public function testRemoveFuzzy(MapInterface $map)
-    {
-        $map->put(1, 'value');
-        $map->remove(true, false);
 
         self::assertCount(0, $map);
     }
