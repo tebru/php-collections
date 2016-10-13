@@ -113,7 +113,7 @@ class Bag extends AbstractCollection
      */
     public function filter(callable $filter): CollectionInterface
     {
-        return new Bag(array_filter($this->elements, $filter));
+        return new static(array_filter($this->elements, $filter));
     }
 
     /**
