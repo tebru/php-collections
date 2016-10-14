@@ -47,7 +47,7 @@ abstract class AbstractCollection implements CollectionInterface
     {
         $containsAll = true;
         foreach ($collection as $element) {
-            if (!$this->contains($element, $strict)) {
+            if (!$this->contains($element)) {
                 $containsAll = false;
                 break;
             }
@@ -104,7 +104,7 @@ abstract class AbstractCollection implements CollectionInterface
     {
         $size = $this->count();
         foreach ($this as $element) {
-            if (!$collection->contains($element, $strict)) {
+            if (!$collection->contains($element)) {
                 $this->remove($element, $strict);
             }
         }

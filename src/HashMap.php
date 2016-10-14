@@ -255,7 +255,7 @@ class HashMap extends AbstractMap
         switch ($type) {
             case 'object':
                 return spl_object_hash($value);
-            case 'array';
+            case 'array':
                 return md5(serialize($value));
             default:
                 return $type . md5($value);

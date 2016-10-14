@@ -103,7 +103,6 @@ interface MapInterface extends Countable
      * or null
      *
      * @param mixed $key
-     * @param bool $strict
      * @return mixed
      */
     public function remove($key);
