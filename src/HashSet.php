@@ -141,7 +141,7 @@ class HashSet extends AbstractSet
      */
     public function getIterator(): ArrayIterator
     {
-        return new ArrayIterator($this->map->keys()->toArray());
+        return new ArrayIterator($this->toArray());
     }
 
     /**
