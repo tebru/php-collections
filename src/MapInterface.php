@@ -35,14 +35,10 @@ interface MapInterface extends Countable
     /**
      * Returns true if the value exists in the map
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * @param mixed $value
-     * @param bool $strict
      * @return bool
      */
-    public function containsValue($value, bool $strict = true): bool;
+    public function containsValue($value): bool;
 
     /**
      * Return a set representation of map

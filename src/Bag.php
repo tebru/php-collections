@@ -63,33 +63,25 @@ class Bag extends AbstractCollection
     /**
      * Returns true if the collection contains element
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * @param mixed $element
-     * @param bool $strict
      * @return bool
      */
-    public function contains($element, bool $strict = true): bool
+    public function contains($element): bool
     {
-        return in_array($element, $this->elements, $strict);
+        return in_array($element, $this->elements, true);
     }
 
     /**
      * Removes object if it exists
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * Returns true if the element was removed
      *
      * @param mixed $element
-     * @param bool $strict
      * @return bool
      */
-    public function remove($element, bool $strict = true): bool
+    public function remove($element): bool
     {
-        $index = array_search($element, $this->elements, $strict);
+        $index = array_search($element, $this->elements, true);
 
         if (false === $index) {
             return false;

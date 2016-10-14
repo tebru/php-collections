@@ -9,6 +9,7 @@ namespace Tebru\Collection\Test;
 use PHPUnit_Framework_TestCase;
 use Tebru\Collection\ArrayList;
 use Tebru\Collection\Bag;
+use Tebru\Collection\CollectionInterface;
 
 /**
  * Class BagTest
@@ -43,21 +44,5 @@ class BagTest extends PHPUnit_Framework_TestCase
         self::assertAttributeEquals(['bar'], 'elements', $collection);
         self::assertCount(1, $collection);
         self::assertSame('bar', $collection->toArray()[0]);
-    }
-
-    public function testRemoveFuzzy()
-    {
-        $collection = new Bag([1]);
-
-        self::assertTrue($collection->remove(true, false));
-        self::assertCount(0, $collection);
-    }
-
-    public function testRemoveAllFuzzy()
-    {
-        $collection = new Bag([0, 1, 2]);
-        $collection->removeAll(new ArrayList([true]), false);
-
-        self::assertSame([0, 2], $collection->toArray());
     }
 }

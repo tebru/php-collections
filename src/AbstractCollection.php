@@ -36,14 +36,10 @@ abstract class AbstractCollection implements CollectionInterface
     /**
      * Returns true if the collection contains all elements from another collection
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * @param CollectionInterface $collection
-     * @param bool $strict
      * @return bool
      */
-    public function containsAll(CollectionInterface $collection, bool $strict = true): bool
+    public function containsAll(CollectionInterface $collection): bool
     {
         $containsAll = true;
         foreach ($collection as $element) {
@@ -69,20 +65,16 @@ abstract class AbstractCollection implements CollectionInterface
     /**
      * Remove all items in a collection from this collection
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * Returns true if the collection was modified
      *
      * @param CollectionInterface $collection
-     * @param bool $strict
      * @return bool
      */
-    public function removeAll(CollectionInterface $collection, bool $strict = true): bool
+    public function removeAll(CollectionInterface $collection): bool
     {
         $size = $this->count();
         foreach ($collection as $element) {
-            $this->remove($element, $strict);
+            $this->remove($element);
         }
 
         return $size !== $this->count();
@@ -91,21 +83,17 @@ abstract class AbstractCollection implements CollectionInterface
     /**
      * Remove all items from this collection that don't exist in specified collection
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * Returns true if the collection was modified
      *
      * @param CollectionInterface $collection
-     * @param bool $strict
      * @return bool
      */
-    public function retainAll(CollectionInterface $collection, bool $strict = true): bool
+    public function retainAll(CollectionInterface $collection): bool
     {
         $size = $this->count();
         foreach ($this as $element) {
             if (!$collection->contains($element)) {
-                $this->remove($element, $strict);
+                $this->remove($element);
             }
         }
 

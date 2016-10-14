@@ -201,17 +201,6 @@ class ListImplementationTest extends PHPUnit_Framework_TestCase
      * @dataProvider getLists
      * @param ListInterface $list
      */
-    public function testIndexOfFuzzy(ListInterface $list)
-    {
-        $list->add(1);
-
-        self::assertSame(0, $list->indexOf(true, false));
-    }
-
-    /**
-     * @dataProvider getLists
-     * @param ListInterface $list
-     */
     public function testIndexOfNotFound(ListInterface $list)
     {
         $list->add(1);
@@ -228,17 +217,6 @@ class ListImplementationTest extends PHPUnit_Framework_TestCase
         $list->addAll(new ArrayList([0, 1, 0, 2]));
 
         self::assertSame(2, $list->lastIndexOf(0));
-    }
-
-    /**
-     * @dataProvider getLists
-     * @param ListInterface $list
-     */
-    public function testLastIndexOfFuzzy(ListInterface $list)
-    {
-        $list->addAll(new ArrayList([0, 1, 0, 2]));
-
-        self::assertSame(2, $list->lastIndexOf(false, false));
     }
 
     /**

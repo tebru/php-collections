@@ -58,14 +58,10 @@ interface CollectionInterface extends IteratorAggregate, Countable
     /**
      * Returns true if the collection contains all elements from another collection
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * @param CollectionInterface $collection
-     * @param bool $strict
      * @return bool
      */
-    public function containsAll(CollectionInterface $collection, bool $strict = true): bool;
+    public function containsAll(CollectionInterface $collection): bool;
 
     /**
      * Returns true if the collection is empty
@@ -77,44 +73,32 @@ interface CollectionInterface extends IteratorAggregate, Countable
     /**
      * Removes object if it exists
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * Returns true if the element was removed
      *
      * @param mixed $element
-     * @param bool $strict
      * @return bool
      */
-    public function remove($element, bool $strict = true): bool;
+    public function remove($element): bool;
 
     /**
      * Remove all items in a collection from this collection
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * Returns true if the collection was modified
      *
      * @param CollectionInterface $collection
-     * @param bool $strict
      * @return bool
      */
-    public function removeAll(CollectionInterface $collection, bool $strict = true): bool;
+    public function removeAll(CollectionInterface $collection): bool;
 
     /**
      * Remove all items from this collection that don't exist in specified collection
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * Returns true if the collection was modified
      *
      * @param CollectionInterface $collection
-     * @param bool $strict
      * @return bool
      */
-    public function retainAll(CollectionInterface $collection, bool $strict = true): bool;
+    public function retainAll(CollectionInterface $collection): bool;
 
     /**
      * Returns an array of all elements in the collection

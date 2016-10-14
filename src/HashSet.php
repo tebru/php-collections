@@ -86,16 +86,12 @@ class HashSet extends AbstractSet
     /**
      * Removes object if it exists
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * Returns true if the element was removed
      *
      * @param mixed $element
-     * @param bool $strict
      * @return bool
      */
-    public function remove($element, bool $strict = true): bool
+    public function remove($element): bool
     {
         $size = $this->map->count();
         $this->map->remove($element);

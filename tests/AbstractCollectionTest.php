@@ -126,18 +126,6 @@ class AbstractCollectionTest extends PHPUnit_Framework_TestCase
      * @dataProvider getCollections
      * @param CollectionInterface $collection
      */
-    public function testRetainAllFuzzy(CollectionInterface $collection)
-    {
-        $collection->addAll(new ArrayList([0, 1, 2]));
-        $collection->retainAll(new ArrayList([false]), false);
-
-        self::assertCount(1, $collection);
-    }
-
-    /**
-     * @dataProvider getCollections
-     * @param CollectionInterface $collection
-     */
     public function testRetainEveryElement(CollectionInterface $collection)
     {
         $collection->addAll(new ArrayList([0, 1, 2]));

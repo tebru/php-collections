@@ -54,18 +54,14 @@ class ArrayList extends AbstractList
     /**
      * Removes object if it exists
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * Returns true if the element was removed
      *
      * @param mixed $element
-     * @param bool $strict
      * @return bool
      */
-    public function remove($element, bool $strict = true): bool
+    public function remove($element): bool
     {
-        $index = $this->indexOf($element, $strict);
+        $index = $this->indexOf($element);
 
         if (-1 === $index) {
             return false;
@@ -100,12 +96,11 @@ class ArrayList extends AbstractList
      * Returns true if the collection contains element
      *
      * @param mixed $element
-     * @param bool $strict
      * @return bool
      */
-    public function contains($element, bool $strict = true): bool
+    public function contains($element): bool
     {
-        return in_array($element, $this->elements, $strict);
+        return in_array($element, $this->elements, true);
     }
 
     /**
@@ -206,16 +201,12 @@ class ArrayList extends AbstractList
      * Returns the index of the first instance of the element, -1 if the element
      * doesn't exist
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * @param mixed $element
-     * @param bool $strict
      * @return int
      */
-    public function indexOf($element, bool $strict = true): int
+    public function indexOf($element): int
     {
-        $index = array_search($element, $this->elements, $strict);
+        $index = array_search($element, $this->elements, true);
 
         return false === $index ? -1 : $index;
     }
@@ -224,18 +215,14 @@ class ArrayList extends AbstractList
      * Returns the index of the last instance of the element, -1 if the element
      * doesn't exist
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * @param mixed $element
-     * @param bool $strict
      * @return int
      */
-    public function lastIndexOf($element, bool $strict = true): int
+    public function lastIndexOf($element): int
     {
         $elements = array_reverse($this->elements);
 
-        $index = array_search($element, $elements, $strict);
+        $index = array_search($element, $elements, true);
 
         // return -1 if not found or (size - index found - 1) to return the index of the element after reverse
         return false === $index ? -1 : $this->count() - $index - 1;
@@ -309,7 +296,7 @@ class ArrayList extends AbstractList
      * @return void
      * @throws \OutOfBoundsException If the index is less than 0 or greater than current size
      */
-    private function assertIndex(int $index):void
+    private function assertIndex(int $index)
     {
         if ($index < 0 || $index > $this->count()) {
             throw new OutOfBoundsException(sprintf('Element unable to be inserted at index "%s"', $index));

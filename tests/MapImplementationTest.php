@@ -85,17 +85,6 @@ class MapImplementationTest extends PHPUnit_Framework_TestCase
      * @dataProvider getMaps
      * @param MapInterface $map
      */
-    public function testContainsFuzzy(MapInterface $map)
-    {
-        $map->put('key', 1);
-
-        self::assertTrue($map->containsValue(true, false));
-    }
-
-    /**
-     * @dataProvider getMaps
-     * @param MapInterface $map
-     */
     public function testEntrySet(MapInterface $map)
     {
         $map->put('key', 'value');

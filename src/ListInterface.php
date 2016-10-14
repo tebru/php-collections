@@ -71,39 +71,27 @@ interface ListInterface extends CollectionInterface
      * Returns the index of the first instance of the element, -1 if the element
      * doesn't exist
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * @param mixed $element
-     * @param bool $strict
      * @return int
      */
-    public function indexOf($element, bool $strict = true): int;
+    public function indexOf($element): int;
 
     /**
      * Returns the index of the last instance of the element, -1 if the element
      * doesn't exist
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
      * @param mixed $element
-     * @param bool $strict
      * @return int
      */
-    public function lastIndexOf($element, bool $strict = true): int;
+    public function lastIndexOf($element): int;
 
     /**
      * Remove the first instance of the element
      *
-     * By default this method will use strict comparison checking, passing false
-     * in will use a double equals (==) instead.
-     *
-     * @param bool $strict
      * @param mixed $element
      * @return bool
      */
-    public function remove($element, bool $strict = true): bool;
+    public function remove($element): bool;
 
     /**
      * Removes the element at the specified index
