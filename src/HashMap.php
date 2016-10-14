@@ -227,7 +227,7 @@ class HashMap extends AbstractMap
      */
     public function filter(callable $filter): MapInterface
     {
-        $map = new HashMap();
+        $map = new static();
 
         /** @var MapEntry $mapEntry */
         foreach ($this->entrySet() as $mapEntry) {
