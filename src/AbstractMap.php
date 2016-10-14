@@ -30,6 +30,20 @@ abstract class AbstractMap implements MapInterface
     }
 
     /**
+     * Adds all the mappings from specified array to this map
+     *
+     * @param array $map
+     * @return void
+     */
+    public function putAllArray(array $map)
+    {
+        /** @var MapEntry $entrySet */
+        foreach ($map as $key => $value) {
+            $this->put($key, $value);
+        }
+    }
+
+    /**
      * Find the first [@see MapEntry] in map
      *
      * The closure will get passed a MapEntry.  Returning true will end the

@@ -95,6 +95,14 @@ interface MapInterface extends Countable
     public function putAll(MapInterface $map);
 
     /**
+     * Adds all the mappings from specified array to this map
+     *
+     * @param array $map
+     * @return void
+     */
+    public function putAllArray(array $map);
+
+    /**
      * Remove the mapping for the key and returns the previous value
      * or null
      *

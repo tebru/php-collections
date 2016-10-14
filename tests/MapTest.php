@@ -52,6 +52,17 @@ class MapTest extends PHPUnit_Framework_TestCase
      * @dataProvider getMaps
      * @param MapInterface $map
      */
+    public function testPutAllArray(MapInterface $map)
+    {
+        $map->putAllArray(['key' => 'value']);
+
+        self::assertSame('value', $map->get('key'));
+    }
+
+    /**
+     * @dataProvider getMaps
+     * @param MapInterface $map
+     */
     public function testFind(MapInterface $map)
     {
         $object1 = new stdClass();

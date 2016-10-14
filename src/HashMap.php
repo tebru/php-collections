@@ -32,6 +32,20 @@ class HashMap extends AbstractMap
     protected $values = [];
 
     /**
+     * Constructor
+     *
+     * @param array $map
+     */
+    public function __construct(array $map = [])
+    {
+        foreach ($map as $key => $value) {
+            $hashcode = $this->hashCode($key);
+            $this->keys[$hashcode] = $key;
+            $this->values[$hashcode] = $value;
+        }
+    }
+
+    /**
      * Removes all mappings from map
      *
      * @return void
