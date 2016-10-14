@@ -190,20 +190,6 @@ abstract class AbstractCollection implements CollectionInterface
     }
 
     /**
-     * Filter the collection using closure
-     *
-     * The closure will get passed each element.  Returning true from the
-     * closure will include that element in the new collection.
-     *
-     * @param callable $filter
-     * @return CollectionInterface
-     */
-    public function filter(callable $filter): CollectionInterface
-    {
-        return new static(array_filter($this->toArray(), $filter));
-    }
-
-    /**
      * Use a closure to determine existence in the collection
      *
      * The closure will get passed each element.  Returning true from the
