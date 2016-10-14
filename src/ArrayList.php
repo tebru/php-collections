@@ -152,9 +152,7 @@ class ArrayList extends AbstractList
      */
     public function insert(int $index, $element)
     {
-        if ($index < 0 || $index > $this->count()) {
-            throw new OutOfBoundsException(sprintf('Element unable to be inserted at index "%s"', $index));
-        }
+        $this->assertIndex($index);
 
         array_splice($this->elements, $index, 0, [$element]);
     }
@@ -169,9 +167,7 @@ class ArrayList extends AbstractList
      */
     public function insertAll(int $index, CollectionInterface $collection): bool
     {
-        if ($index < 0 || $index > $this->count()) {
-            throw new OutOfBoundsException(sprintf('Elements unable to be inserted at index "%s"', $index));
-        }
+        $this->assertIndex($index);
 
         $size = $this->count();
         array_splice($this->elements, $index, 0, $collection->toArray());
@@ -274,9 +270,7 @@ class ArrayList extends AbstractList
      */
     public function set(int $index, $element)
     {
-        if ($index < 0 || $index > $this->count()) {
-            throw new OutOfBoundsException(sprintf('Element unable to be set at index "%s"', $index));
-        }
+        $this->assertIndex($index);
 
         $oldElement = null;
         if ($this->has($index)) {
@@ -306,5 +300,19 @@ class ArrayList extends AbstractList
         $newList = array_slice($this->elements, $fromIndex, $toIndex - $fromIndex);
 
         return new ArrayList($newList);
+    }
+
+    /**
+     * Assert the index is able to be inserted
+     *
+     * @param int $index
+     * @return void
+     * @throws \OutOfBoundsException If the index is less than 0 or greater than current size
+     */
+    private function assertIndex(int $index):void
+    {
+        if ($index < 0 || $index > $this->count()) {
+            throw new OutOfBoundsException(sprintf('Element unable to be inserted at index "%s"', $index));
+        }
     }
 }
