@@ -30,6 +30,27 @@ abstract class AbstractMap implements MapInterface
     }
 
     /**
+     * Find the first [@see MapEntry] in map
+     *
+     * The closure will get passed a MapEntry.  Returning true will end the
+     * loop and return that MapEntry
+     *
+     * @param callable $find
+     * @return MapEntry|null
+     */
+    public function find(callable $find)
+    {
+        /** @var MapEntry $mapEntry */
+        foreach ($this->entrySet() as $mapEntry) {
+            if (true === $find($mapEntry)) {
+                return $mapEntry;
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Use a closure to determine existence in the map
      *
      * The closure will get passed a [@see MapEntry].  Returning true from the

@@ -108,6 +108,17 @@ interface CollectionInterface extends IteratorAggregate, Countable
     public function toArray(): array;
 
     /**
+     * Find the first element in collection
+     *
+     * The closure will get passed each element.  Returning true will end the
+     * loop and return that element
+     *
+     * @param callable $find
+     * @return mixed
+     */
+    public function find(callable $find);
+
+    /**
      * Filter the collection using closure
      *
      * The closure will get passed each element.  Returning true from the

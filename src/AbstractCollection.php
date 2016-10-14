@@ -101,6 +101,24 @@ abstract class AbstractCollection implements CollectionInterface
     }
 
     /**
+     * Find the first element in collection
+     *
+     * The closure will get passed each element.  Returning true will end the
+     * loop and return that element
+     *
+     * @param callable $find
+     * @return mixed
+     */
+    public function find(callable $find)
+    {
+        foreach ($this as $element) {
+            if (true === $find($element)) {
+                return $element;
+            }
+        }
+    }
+
+    /**
      * Use a closure to determine existence in the collection
      *
      * The closure will get passed each element.  Returning true from the

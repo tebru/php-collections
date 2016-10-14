@@ -137,6 +137,17 @@ interface MapInterface extends Countable
     public function filter(callable $filter): MapInterface;
 
     /**
+     * Find the first [@see MapEntry] in map
+     *
+     * The closure will get passed a MapEntry.  Returning true will end the
+     * loop and return that MapEntry
+     *
+     * @param callable $find
+     * @return MapEntry|null
+     */
+    public function find(callable $find);
+
+    /**
      * Use a closure to determine existence in the map
      *
      * The closure will get passed a [@see MapEntry].  Returning true from the
