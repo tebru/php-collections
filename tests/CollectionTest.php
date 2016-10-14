@@ -51,6 +51,17 @@ class CollectionTest extends PHPUnit_Framework_TestCase
      * @dataProvider getCollections
      * @param CollectionInterface $collection
      */
+    public function testContainsAllSub(CollectionInterface $collection)
+    {
+        $collection->addAll(new ArrayList([0, 1, 2]));
+
+        self::assertTrue($collection->containsAll(new ArrayList([0])));
+    }
+
+    /**
+     * @dataProvider getCollections
+     * @param CollectionInterface $collection
+     */
     public function testContainsAllFalse(CollectionInterface $collection)
     {
         $collection->addAll(new ArrayList([0, 1, 2]));
