@@ -27,7 +27,7 @@ class HashSetTest extends PHPUnit_Framework_TestCase
     public function testConstructWithElements()
     {
         $elements = [1, false, null, new \stdClass()];
-        $collection = new HashSet(new ArrayList($elements));
+        $collection = new HashSet($elements);
 
         self::assertCount(4, $collection);
         self::assertSame($elements[0], $collection->toArray()[0]);
@@ -38,7 +38,7 @@ class HashSetTest extends PHPUnit_Framework_TestCase
 
     public function testConstructWithAssociativeArray()
     {
-        $collection = new HashSet(new ArrayList(['foo' => 'bar']));
+        $collection = new HashSet(['foo' => 'bar']);
 
         self::assertCount(1, $collection);
         self::assertSame('bar', $collection->toArray()[0]);
@@ -46,7 +46,7 @@ class HashSetTest extends PHPUnit_Framework_TestCase
 
     public function testAddDuplicate()
     {
-        $collection = new HashSet(new ArrayList([0, 1, 2]));
+        $collection = new HashSet([0, 1, 2]);
 
         self::assertFalse($collection->add(1));
         self::assertCount(3, $collection);
@@ -54,7 +54,7 @@ class HashSetTest extends PHPUnit_Framework_TestCase
 
     public function testAddAllDuplicates()
     {
-        $collection = new HashSet(new ArrayList([0, 1, 2]));
+        $collection = new HashSet([0, 1, 2]);
 
         self::assertFalse($collection->addAll(new ArrayList([0, 1, 2])));
         self::assertCount(3, $collection);
@@ -62,7 +62,7 @@ class HashSetTest extends PHPUnit_Framework_TestCase
 
     public function testAddAllDuplicatesExtra()
     {
-        $collection = new HashSet(new ArrayList([0, 1, 2]));
+        $collection = new HashSet([0, 1, 2]);
 
         self::assertTrue($collection->addAll(new ArrayList([0, 1, 2, 3])));
         self::assertCount(4, $collection);

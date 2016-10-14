@@ -83,27 +83,6 @@ class ArrayList extends AbstractList
     }
 
     /**
-     * Returns the size of the collection
-     *
-     * @return int
-     */
-    public function count(): int
-    {
-        return count($this->elements);
-    }
-
-    /**
-     * Returns true if the collection contains element
-     *
-     * @param mixed $element
-     * @return bool
-     */
-    public function contains($element): bool
-    {
-        return in_array($element, $this->elements, true);
-    }
-
-    /**
      * Returns an array of all elements in the collection
      *
      * @return array
@@ -111,20 +90,6 @@ class ArrayList extends AbstractList
     public function toArray(): array
     {
         return $this->elements;
-    }
-
-    /**
-     * Filter the collection using closure
-     *
-     * The closure will get passed each element.  Returning true from the
-     * closure will include that element in the new collection.
-     *
-     * @param callable $filter
-     * @return CollectionInterface
-     */
-    public function filter(callable $filter): CollectionInterface
-    {
-        return new static(array_filter($this->elements, $filter));
     }
 
     /**
@@ -198,37 +163,6 @@ class ArrayList extends AbstractList
     }
 
     /**
-     * Returns the index of the first instance of the element, -1 if the element
-     * doesn't exist
-     *
-     * @param mixed $element
-     * @return int
-     */
-    public function indexOf($element): int
-    {
-        $index = array_search($element, $this->elements, true);
-
-        return false === $index ? -1 : $index;
-    }
-
-    /**
-     * Returns the index of the last instance of the element, -1 if the element
-     * doesn't exist
-     *
-     * @param mixed $element
-     * @return int
-     */
-    public function lastIndexOf($element): int
-    {
-        $elements = array_reverse($this->elements);
-
-        $index = array_search($element, $elements, true);
-
-        // return -1 if not found or (size - index found - 1) to return the index of the element after reverse
-        return false === $index ? -1 : $this->count() - $index - 1;
-    }
-
-    /**
      * Removes the element at the specified index
      *
      * This returns the element that was previously at this index
@@ -270,33 +204,13 @@ class ArrayList extends AbstractList
     }
 
     /**
-     * Returns a new ListInterface ranging from $fromIndex inclusive to
-     * $toIndex exclusive
-     *
-     * @param int $fromIndex
-     * @param int $toIndex
-     * @return ListInterface
-     * @throws \OutOfBoundsException If to or from index does not exist
-     */
-    public function subList(int $fromIndex, int $toIndex): ListInterface
-    {
-        if (!$this->has($fromIndex) || !$this->has($toIndex - 1)) {
-            throw new OutOfBoundsException('Unable to create sub list as $toIndex or $fromIndex do not exist in list');
-        }
-
-        $newList = array_slice($this->elements, $fromIndex, $toIndex - $fromIndex);
-
-        return new static($newList);
-    }
-
-    /**
      * Assert the index is able to be inserted
      *
      * @param int $index
      * @return void
      * @throws \OutOfBoundsException If the index is less than 0 or greater than current size
      */
-    private function assertIndex(int $index)
+    protected function assertIndex(int $index)
     {
         if ($index < 0 || $index > $this->count()) {
             throw new OutOfBoundsException(sprintf('Element unable to be inserted at index "%s"', $index));

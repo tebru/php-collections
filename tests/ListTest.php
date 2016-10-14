@@ -12,13 +12,14 @@ use Tebru\Collection\ArrayList;
 use Tebru\Collection\ListInterface;
 
 /**
- * Class ListImplementationTest
+ * Class ListTest
  *
  * @author Nate Brunette <n@tebru.net>
  *
+ * @covers \Tebru\Collection\AbstractList
  * @covers \Tebru\Collection\ArrayList
  */
-class ListImplementationTest extends PHPUnit_Framework_TestCase
+class ListTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider getLists

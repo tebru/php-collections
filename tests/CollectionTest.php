@@ -31,7 +31,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
      */
     public function testAddAll(CollectionInterface $collection)
     {
-        $collection->addAllArray([0, 1, 2]);
+        $collection->addAll(new ArrayList([0, 1, 2]));
 
         self::assertCount(3, $collection);
     }

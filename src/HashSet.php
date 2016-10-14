@@ -29,14 +29,14 @@ class HashSet extends AbstractSet
      *
      * Use [@see AbstractSet::add] to ensure uniqueness
      *
-     * @param CollectionInterface $elements
+     * @param array $elements
      */
-    public function __construct(CollectionInterface $elements = null)
+    public function __construct(array $elements = null)
     {
         $this->map = new HashMap();
 
         if (null !== $elements) {
-            $this->addAll($elements);
+            $this->addAllArray($elements);
         }
     }
 
@@ -84,17 +84,6 @@ class HashSet extends AbstractSet
     }
 
     /**
-     * Returns true if the collection contains element
-     *
-     * @param mixed $element
-     * @return bool
-     */
-    public function contains($element): bool
-    {
-        return $this->map->containsKey($element);
-    }
-
-    /**
      * Returns an array of all elements in the collection
      *
      * @return array
@@ -105,20 +94,6 @@ class HashSet extends AbstractSet
     }
 
     /**
-     * Filter the collection using closure
-     *
-     * The closure will get passed each element.  Returning true from the
-     * closure will include that element in the new collection.
-     *
-     * @param callable $filter
-     * @return CollectionInterface
-     */
-    public function filter(callable $filter): CollectionInterface
-    {
-        return new HashSet(new ArrayList(array_filter($this->map->keys()->toArray(), $filter)));
-    }
-
-    /**
      * Retrieve an external iterator
      *
      * @return ArrayIterator
@@ -126,15 +101,5 @@ class HashSet extends AbstractSet
     public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->toArray());
-    }
-
-    /**
-     * Returns the size of the collection
-     *
-     * @return int
-     */
-    public function count(): int
-    {
-        return count($this->map);
     }
 }

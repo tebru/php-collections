@@ -47,6 +47,17 @@ abstract class AbstractCollection implements CollectionInterface
     }
 
     /**
+     * Returns true if the collection contains element
+     *
+     * @param mixed $element
+     * @return bool
+     */
+    public function contains($element): bool
+    {
+        return in_array($element, $this->toArray(), true);
+    }
+
+    /**
      * Returns true if the collection contains all elements from another collection
      *
      * @param CollectionInterface $collection
@@ -72,6 +83,16 @@ abstract class AbstractCollection implements CollectionInterface
         }
 
         return true;
+    }
+
+    /**
+     * Returns the size of the collection
+     *
+     * @return int
+     */
+    public function count(): int
+    {
+        return count($this->toArray());
     }
 
     /**
@@ -164,6 +185,22 @@ abstract class AbstractCollection implements CollectionInterface
                 return $element;
             }
         }
+
+        return null;
+    }
+
+    /**
+     * Filter the collection using closure
+     *
+     * The closure will get passed each element.  Returning true from the
+     * closure will include that element in the new collection.
+     *
+     * @param callable $filter
+     * @return CollectionInterface
+     */
+    public function filter(callable $filter): CollectionInterface
+    {
+        return new static(array_filter($this->toArray(), $filter));
     }
 
     /**

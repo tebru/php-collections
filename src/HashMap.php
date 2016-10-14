@@ -136,10 +136,10 @@ class HashMap extends AbstractMap
     public function keySet(SetInterface $set = null): SetInterface
     {
         if (null === $set) {
-            return new HashSet(new ArrayList($this->keys));
+            return new HashSet($this->keys);
         }
 
-        $set->addAll(new ArrayList($this->keys));
+        $set->addAllArray($this->keys);
 
         return $set;
     }
@@ -208,7 +208,7 @@ class HashMap extends AbstractMap
             return new ArrayList($this->keys);
         }
 
-        $collection->addAll(new ArrayList($this->keys));
+        $collection->addAllArray($this->keys);
 
         return $collection;
     }
@@ -225,7 +225,7 @@ class HashMap extends AbstractMap
             return new ArrayList($this->values);
         }
 
-        $collection->addAll(new ArrayList($this->values));
+        $collection->addAllArray($this->values);
 
         return $collection;
     }

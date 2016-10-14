@@ -61,17 +61,6 @@ class Bag extends AbstractCollection
     }
 
     /**
-     * Returns true if the collection contains element
-     *
-     * @param mixed $element
-     * @return bool
-     */
-    public function contains($element): bool
-    {
-        return in_array($element, $this->elements, true);
-    }
-
-    /**
      * Removes object if it exists
      *
      * Returns true if the element was removed
@@ -100,30 +89,6 @@ class Bag extends AbstractCollection
     public function toArray(): array
     {
         return $this->elements;
-    }
-
-    /**
-     * Filter the collection using closure
-     *
-     * The closure will get passed each element.  Returning true from the
-     * closure will include that element in the new collection.
-     *
-     * @param callable $filter
-     * @return CollectionInterface
-     */
-    public function filter(callable $filter): CollectionInterface
-    {
-        return new static(array_filter($this->elements, $filter));
-    }
-
-    /**
-     * Returns the size of the collection
-     *
-     * @return int
-     */
-    public function count(): int
-    {
-        return count($this->elements);
     }
 
     /**
