@@ -41,6 +41,16 @@ interface CollectionInterface extends IteratorAggregate, Countable
     public function addAll(CollectionInterface $collection): bool;
 
     /**
+     * Ensure all elements of an array exists in this collection
+     *
+     * Return true if the collection has changed, and false if it hasn't
+     *
+     * @param array $collection
+     * @return bool
+     */
+    public function addAllArray(array $collection): bool;
+
+    /**
      * Removes all elements from a collection
      *
      * @return void
@@ -62,6 +72,14 @@ interface CollectionInterface extends IteratorAggregate, Countable
      * @return bool
      */
     public function containsAll(CollectionInterface $collection): bool;
+
+    /**
+     * Returns true if the collection contains all elements from an array
+     *
+     * @param array $collection
+     * @return bool
+     */
+    public function containsAllArray(array $collection): bool;
 
     /**
      * Returns true if the collection is empty
@@ -91,6 +109,16 @@ interface CollectionInterface extends IteratorAggregate, Countable
     public function removeAll(CollectionInterface $collection): bool;
 
     /**
+     * Remove all items in an array from this collection
+     *
+     * Returns true if the collection was modified
+     *
+     * @param array $collection
+     * @return bool
+     */
+    public function removeAllArray(array $collection): bool;
+
+    /**
      * Remove all items from this collection that don't exist in specified collection
      *
      * Returns true if the collection was modified
@@ -99,6 +127,16 @@ interface CollectionInterface extends IteratorAggregate, Countable
      * @return bool
      */
     public function retainAll(CollectionInterface $collection): bool;
+
+    /**
+     * Remove all items from this collection that don't exist in specified array
+     *
+     * Returns true if the collection was modified
+     *
+     * @param array $collection
+     * @return bool
+     */
+    public function retainAllArray(array $collection): bool;
 
     /**
      * Returns an array of all elements in the collection

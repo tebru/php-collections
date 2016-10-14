@@ -31,7 +31,18 @@ class CollectionTest extends PHPUnit_Framework_TestCase
      */
     public function testAddAll(CollectionInterface $collection)
     {
-        $collection->addAll(new ArrayList([0, 1, 2]));
+        $collection->addAllArray([0, 1, 2]);
+
+        self::assertCount(3, $collection);
+    }
+
+    /**
+     * @dataProvider getCollections
+     * @param CollectionInterface $collection
+     */
+    public function testAddAllArray(CollectionInterface $collection)
+    {
+        $collection->addAllArray([0, 1, 2]);
 
         self::assertCount(3, $collection);
     }
@@ -42,7 +53,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
      */
     public function testContainsAll(CollectionInterface $collection)
     {
-        $collection->addAll(new ArrayList([0, 1, 2]));
+        $collection->addAllArray([0, 1, 2]);
 
         self::assertTrue($collection->containsAll(new ArrayList([0, 1, 2])));
     }
@@ -51,9 +62,20 @@ class CollectionTest extends PHPUnit_Framework_TestCase
      * @dataProvider getCollections
      * @param CollectionInterface $collection
      */
+    public function testContainsAllArray(CollectionInterface $collection)
+    {
+        $collection->addAllArray([0, 1, 2]);
+
+        self::assertTrue($collection->containsAllArray([0, 1, 2]));
+    }
+
+    /**
+     * @dataProvider getCollections
+     * @param CollectionInterface $collection
+     */
     public function testContainsAllSub(CollectionInterface $collection)
     {
-        $collection->addAll(new ArrayList([0, 1, 2]));
+        $collection->addAllArray([0, 1, 2]);
 
         self::assertTrue($collection->containsAll(new ArrayList([0])));
     }
@@ -64,7 +86,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
      */
     public function testContainsAllFalse(CollectionInterface $collection)
     {
-        $collection->addAll(new ArrayList([0, 1, 2]));
+        $collection->addAllArray([0, 1, 2]);
 
         self::assertFalse($collection->containsAll(new ArrayList([0, 1, 2, 3])));
     }
@@ -94,8 +116,20 @@ class CollectionTest extends PHPUnit_Framework_TestCase
      */
     public function testRemoveAll(CollectionInterface $collection)
     {
-        $collection->addAll(new ArrayList([0, 1, 2]));
+        $collection->addAllArray([0, 1, 2]);
         $collection->removeAll(new ArrayList([1]));
+
+        self::assertSame([0, 2], $collection->toArray());
+    }
+
+    /**
+     * @dataProvider getCollections
+     * @param CollectionInterface $collection
+     */
+    public function testRemoveAllArray(CollectionInterface $collection)
+    {
+        $collection->addAllArray([0, 1, 2]);
+        $collection->removeAllArray([1]);
 
         self::assertSame([0, 2], $collection->toArray());
     }
@@ -106,7 +140,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
      */
     public function testRemoveEveryElement(CollectionInterface $collection)
     {
-        $collection->addAll(new ArrayList([0, 1, 2]));
+        $collection->addAllArray([0, 1, 2]);
         $collection->removeAll(new ArrayList([0, 1, 2]));
 
         self::assertCount(0, $collection);
@@ -118,7 +152,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
      */
     public function testRemoveEveryElementExcess(CollectionInterface $collection)
     {
-        $collection->addAll(new ArrayList([0, 1, 2]));
+        $collection->addAllArray([0, 1, 2]);
         $collection->removeAll(new ArrayList([0, 1, 2, 3]));
 
         self::assertCount(0, $collection);
@@ -130,8 +164,20 @@ class CollectionTest extends PHPUnit_Framework_TestCase
      */
     public function testRetainAll(CollectionInterface $collection)
     {
-        $collection->addAll(new ArrayList([0, 1, 2]));
+        $collection->addAllArray([0, 1, 2]);
         $collection->retainAll(new ArrayList([0]));
+
+        self::assertCount(1, $collection);
+    }
+
+    /**
+     * @dataProvider getCollections
+     * @param CollectionInterface $collection
+     */
+    public function testRetainAllArray(CollectionInterface $collection)
+    {
+        $collection->addAllArray([0, 1, 2]);
+        $collection->retainAllArray([0]);
 
         self::assertCount(1, $collection);
     }
@@ -142,7 +188,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
      */
     public function testRetainEveryElement(CollectionInterface $collection)
     {
-        $collection->addAll(new ArrayList([0, 1, 2]));
+        $collection->addAllArray([0, 1, 2]);
         $collection->retainAll(new ArrayList([0, 1, 2]));
 
         self::assertCount(3, $collection);
@@ -154,7 +200,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
      */
     public function testRetainEveryElementExcess(CollectionInterface $collection)
     {
-        $collection->addAll(new ArrayList([0, 1, 2]));
+        $collection->addAllArray([0, 1, 2]);
         $collection->retainAll(new ArrayList([0, 1, 2, 3]));
 
         self::assertCount(3, $collection);
@@ -175,7 +221,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $object3 = new stdClass();
         $object3->foo = 3;
 
-        $collection->addAll(new ArrayList([$object1, $object2, $object3]));
+        $collection->addAllArray([$object1, $object2, $object3]);
 
         self::assertSame($object2, $collection->find(function (stdClass $class) {
             return 2 === $class->foo;
@@ -197,7 +243,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $object3 = new stdClass();
         $object3->foo = 3;
 
-        $collection->addAll(new ArrayList([$object1, $object2, $object3]));
+        $collection->addAllArray([$object1, $object2, $object3]);
 
         self::assertNull($collection->find(function (stdClass $class) {
             return 4 === $class->foo;
@@ -219,7 +265,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $object3 = new stdClass();
         $object3->foo = 3;
 
-        $collection->addAll(new ArrayList([$object1, $object2, $object3]));
+        $collection->addAllArray([$object1, $object2, $object3]);
 
         self::assertTrue($collection->exists(function (stdClass $class) {
             return 2 === $class->foo;
@@ -270,7 +316,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
      */
     public function testClear(CollectionInterface $collection)
     {
-        $collection->addAll(new ArrayList([1, 2, 3]));
+        $collection->addAllArray([1, 2, 3]);
         $collection->clear();
 
         self::assertCount(0, $collection);
@@ -282,7 +328,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
      */
     public function testCount(CollectionInterface $collection)
     {
-        $collection->addAll(new ArrayList([1, 2, 3]));
+        $collection->addAllArray([1, 2, 3]);
 
         self::assertSame(3, $collection->count());
     }
@@ -335,7 +381,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $object3 = new stdClass();
         $object3->foo = 3;
 
-        $collection->addAll(new ArrayList([$object1, $object2, $object3]));
+        $collection->addAllArray([$object1, $object2, $object3]);
 
         $result = $collection->filter(function (stdClass $class) {
             return 0 !== $class->foo % 2;
@@ -350,7 +396,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
      */
     public function testGetIterator(CollectionInterface $collection)
     {
-        $collection->addAll(new ArrayList([0, 1, 2]));
+        $collection->addAllArray([0, 1, 2]);
 
         $count = 0;
         foreach ($collection as $element) {

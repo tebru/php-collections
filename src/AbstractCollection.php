@@ -25,6 +25,19 @@ abstract class AbstractCollection implements CollectionInterface
      */
     public function addAll(CollectionInterface $collection): bool
     {
+        return $this->addAllArray($collection->toArray());
+    }
+
+    /**
+     * Ensure all elements of an array exists in this collection
+     *
+     * Return true if the collection has changed, and false if it hasn't
+     *
+     * @param array $collection
+     * @return bool
+     */
+    public function addAllArray(array $collection): bool
+    {
         $size = $this->count();
         foreach ($collection as $element) {
             $this->add($element);
@@ -40,6 +53,17 @@ abstract class AbstractCollection implements CollectionInterface
      * @return bool
      */
     public function containsAll(CollectionInterface $collection): bool
+    {
+        return $this->containsAllArray($collection->toArray());
+    }
+
+    /**
+     * Returns true if the collection contains all elements from an array
+     *
+     * @param array $collection
+     * @return bool
+     */
+    public function containsAllArray(array $collection): bool
     {
         foreach ($collection as $element) {
             if (!$this->contains($element)) {
@@ -70,6 +94,19 @@ abstract class AbstractCollection implements CollectionInterface
      */
     public function removeAll(CollectionInterface $collection): bool
     {
+        return $this->removeAllArray($collection->toArray());
+    }
+
+    /**
+     * Remove all items in an array from this collection
+     *
+     * Returns true if the collection was modified
+     *
+     * @param array $collection
+     * @return bool
+     */
+    public function removeAllArray(array $collection): bool
+    {
         $size = $this->count();
         foreach ($collection as $element) {
             $this->remove($element);
@@ -88,9 +125,22 @@ abstract class AbstractCollection implements CollectionInterface
      */
     public function retainAll(CollectionInterface $collection): bool
     {
+        return $this->retainAllArray($collection->toArray());
+    }
+
+    /**
+     * Remove all items from this collection that don't exist in specified array
+     *
+     * Returns true if the collection was modified
+     *
+     * @param array $collection
+     * @return bool
+     */
+    public function retainAllArray(array $collection): bool
+    {
         $size = $this->count();
         foreach ($this as $element) {
-            if (!$collection->contains($element)) {
+            if (!in_array($element, $collection, true)) {
                 $this->remove($element);
             }
         }
