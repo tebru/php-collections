@@ -58,22 +58,6 @@ class HashSet extends AbstractSet
     }
 
     /**
-     * Adds any elements from specified collection that do not already exist
-     *
-     * @param CollectionInterface $collection
-     * @return bool
-     */
-    public function addAll(CollectionInterface $collection): bool
-    {
-        $size = $this->count();
-        foreach ($collection as $element) {
-            $this->add($element);
-        }
-
-        return $size !== $this->count();
-    }
-
-    /**
      * Removes all elements from a collection
      *
      * @return void
