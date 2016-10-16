@@ -6,8 +6,6 @@
 
 namespace Tebru\Collection;
 
-use OutOfRangeException;
-
 /**
  * Class HashMap
  *
@@ -54,7 +52,7 @@ class HashMap extends AbstractMap
      */
     public function containsKey($key): bool
     {
-        return array_key_exists($this->hashCode($key), $this->elements);
+        return $this->doContainsKey($this->hashCode($key));
     }
 
     /**
@@ -96,13 +94,7 @@ class HashMap extends AbstractMap
      */
     public function get($key)
     {
-        $hashedKey = $this->hashCode($key);
-
-        if (!$this->containsKey($key)) {
-            throw new OutOfRangeException(sprintf('Tried to access array at key "%s"', $hashedKey));
-        }
-
-        return $this->elements[$hashedKey]->value;
+        return $this->doGet($this->hashCode($key));
     }
 
     /**
@@ -144,10 +136,7 @@ class HashMap extends AbstractMap
      */
     public function put($key, $value)
     {
-        $oldValue = $this->remove($key);
-        $this->elements[$this->hashCode($key)] = new MapEntry($key, $value);
-
-        return false === $oldValue ? null : $oldValue;
+        return $this->doPut($this->hashCode($key), $key, $value);
     }
 
     /**
@@ -159,16 +148,7 @@ class HashMap extends AbstractMap
      */
     public function remove($key)
     {
-        if (!$this->containsKey($key)) {
-            return false;
-        }
-
-        $hashedKey = $this->hashCode($key);
-        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
-        $oldValue = $this->get($key);
-        unset($this->elements[$hashedKey]);
-
-        return $oldValue;
+        return $this->doRemove($this->hashCode($key));
     }
 
     /**
@@ -279,5 +259,65 @@ class HashMap extends AbstractMap
         return array_map(function (MapEntry $mapEntry) {
             return $mapEntry->value;
         }, $this->elements);
+    }
+
+    /**
+     * Internal implementation for containsKey()
+     *
+     * @param string $hashCode
+     * @return bool
+     */
+    private function doContainsKey(string $hashCode): bool
+    {
+        return array_key_exists($hashCode, $this->elements);
+    }
+
+    /**
+     * Internal implementation for get()
+     *
+     * @param string $hashCode
+     * @return mixed
+     */
+    private function doGet(string $hashCode)
+    {
+        if (!$this->doContainsKey($hashCode)) {
+            return null;
+        }
+
+        return $this->elements[$hashCode]->value;
+    }
+
+    /**
+     * Internal implementation for put()
+     *
+     * @param string $hashCode
+     * @param mixed $key
+     * @param mixed $value
+     * @return mixed|null
+     */
+    private function doPut(string $hashCode, $key, $value)
+    {
+        $oldValue = $this->doRemove($hashCode);
+        $this->elements[$hashCode] = new MapEntry($key, $value);
+
+        return $oldValue;
+    }
+
+    /**
+     * Internal implementation for remove()
+     *
+     * @param string $hashCode
+     * @return mixed|null
+     */
+    private function doRemove(string $hashCode)
+    {
+        if (!$this->doContainsKey($hashCode)) {
+            return null;
+        }
+
+        $oldValue = $this->doGet($hashCode);
+        unset($this->elements[$hashCode]);
+
+        return $oldValue;
     }
 }

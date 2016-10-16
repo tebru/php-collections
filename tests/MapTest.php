@@ -247,10 +247,9 @@ class MapTest extends PHPUnit_Framework_TestCase
      */
     public function testGetException(MapInterface $map)
     {
-        $this->expectException(OutOfRangeException::class);
-
         $map->put('key', 'value');
-        $map->get('key2');
+
+        self::assertNull($map->get('key2'));
     }
 
     /**
@@ -375,7 +374,7 @@ class MapTest extends PHPUnit_Framework_TestCase
     public function testRemoveException(MapInterface $map)
     {
         $map->put('key', 'value');
-        self::assertFalse($map->remove('key2'));
+        self::assertNull($map->remove('key2'));
     }
 
     /**
