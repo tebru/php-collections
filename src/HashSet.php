@@ -48,13 +48,27 @@ class HashSet extends AbstractSet
      */
     public function add($element): bool
     {
+        $key = $this->getKey($element);
         if ($this->contains($element)) {
             return false;
         }
 
-        $this->map->put($element, true);
+        $this->map->put($key, $element);
 
         return true;
+    }
+
+    /**
+     * Returns true if the collection contains element
+     *
+     * @param mixed $element
+     * @return bool
+     */
+    public function contains($element): bool
+    {
+        $key = $this->getKey($element);
+
+        return $this->map->containsKey($key);
     }
 
     /**
@@ -68,6 +82,28 @@ class HashSet extends AbstractSet
     }
 
     /**
+     * Remove all items from this collection that don't exist in specified array
+     *
+     * Returns true if the collection was modified
+     *
+     * @param array $collection
+     * @return bool
+     */
+    public function retainAllArray(array $collection): bool
+    {
+        $collectionKeys = array_map(function ($element) { return $this->getKey($element); }, $collection);
+
+        $size = $this->count();
+        foreach ($this as $element) {
+            if (!in_array($this->getKey($element), $collectionKeys, true)) {
+                $this->remove($element);
+            }
+        }
+
+        return $size !== $this->count();
+    }
+
+    /**
      * Removes object if it exists
      *
      * Returns true if the element was removed
@@ -77,8 +113,9 @@ class HashSet extends AbstractSet
      */
     public function remove($element): bool
     {
+        $key = $this->getKey($element);
         $size = $this->map->count();
-        $this->map->remove($element);
+        $this->map->remove($key);
 
         return $size !== $this->map->count();
     }
@@ -90,7 +127,7 @@ class HashSet extends AbstractSet
      */
     public function toArray(): array
     {
-        return $this->map->keys()->toArray();
+        return $this->map->values()->toArray();
     }
 
     /**
@@ -115,5 +152,16 @@ class HashSet extends AbstractSet
     public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->toArray());
+    }
+
+    /**
+     * Return the key to use for the HashMap
+     *
+     * @param mixed $element
+     * @return mixed
+     */
+    protected function getKey($element)
+    {
+        return $element;
     }
 }
