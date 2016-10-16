@@ -18,18 +18,11 @@ use OutOfRangeException;
 class HashMap extends AbstractMap
 {
     /**
-     * The mapping keys
+     * An array of [@see MapEntry] elements
      *
-     * @var array
+     * @var MapEntry[]
      */
-    protected $keys = [];
-
-    /**
-     * The mapping values
-     *
-     * @var array
-     */
-    protected $values = [];
+    protected $elements = [];
 
     /**
      * Constructor
@@ -39,9 +32,7 @@ class HashMap extends AbstractMap
     public function __construct(array $map = [])
     {
         foreach ($map as $key => $value) {
-            $hashcode = $this->hashCode($key);
-            $this->keys[$hashcode] = $key;
-            $this->values[$hashcode] = $value;
+            $this->put($key, $value);
         }
     }
 
@@ -52,8 +43,7 @@ class HashMap extends AbstractMap
      */
     public function clear()
     {
-        $this->keys = [];
-        $this->values = [];
+        $this->elements = [];
     }
 
     /**
@@ -64,7 +54,7 @@ class HashMap extends AbstractMap
      */
     public function containsKey($key): bool
     {
-        return array_key_exists($this->hashCode($key), $this->keys);
+        return array_key_exists($this->hashCode($key), $this->elements);
     }
 
     /**
@@ -75,7 +65,9 @@ class HashMap extends AbstractMap
      */
     public function containsValue($value): bool
     {
-        return in_array($value, $this->values, true);
+        return $this->exists(function (MapEntry $mapEntry) use ($value) {
+            return $mapEntry->value === $value;
+        });
     }
 
     /**
@@ -90,9 +82,7 @@ class HashMap extends AbstractMap
     public function entrySet(SetInterface $set = null): SetInterface
     {
         $set = $set ?? new HashSet();
-        foreach ($this->keys as $hashCode => $key) {
-            $set->add(new MapEntry($key, $this->values[$hashCode]));
-        }
+        $set->addAllArray($this->elements);
 
         return $set;
     }
@@ -107,11 +97,12 @@ class HashMap extends AbstractMap
     public function get($key)
     {
         $hashedKey = $this->hashCode($key);
+
         if (!$this->containsKey($key)) {
             throw new OutOfRangeException(sprintf('Tried to access array at key "%s"', $hashedKey));
         }
 
-        return $this->values[$hashedKey];
+        return $this->elements[$hashedKey]->value;
     }
 
     /**
@@ -125,7 +116,7 @@ class HashMap extends AbstractMap
     }
 
     /**
-     * Returns a set of they keys in the map
+     * Returns a set of the keys in the map
      *
      * If a set is passed in, that set will be populated, otherwise
      * a default set will be used.
@@ -136,10 +127,10 @@ class HashMap extends AbstractMap
     public function keySet(SetInterface $set = null): SetInterface
     {
         if (null === $set) {
-            return new HashSet($this->keys);
+            return new HashSet($this->getKeys());
         }
 
-        $set->addAllArray($this->keys);
+        $set->addAllArray($this->getKeys());
 
         return $set;
     }
@@ -153,17 +144,10 @@ class HashMap extends AbstractMap
      */
     public function put($key, $value)
     {
-        $oldValue = null;
-        $hashedKey = $this->hashCode($key);
-        if ($this->containsKey($key)) {
-            $oldValue = $this->get($key);
-            $this->remove($hashedKey);
-        }
+        $oldValue = $this->remove($key);
+        $this->elements[$this->hashCode($key)] = new MapEntry($key, $value);
 
-        $this->keys[$hashedKey] = $key;
-        $this->values[$hashedKey] = $value;
-
-        return $oldValue;
+        return false === $oldValue ? null : $oldValue;
     }
 
     /**
@@ -175,13 +159,14 @@ class HashMap extends AbstractMap
      */
     public function remove($key)
     {
-        $hashedKey = $this->hashCode($key);
         if (!$this->containsKey($key)) {
             return false;
         }
 
+        $hashedKey = $this->hashCode($key);
+        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         $oldValue = $this->get($key);
-        unset($this->keys[$hashedKey], $this->values[$hashedKey]);
+        unset($this->elements[$hashedKey]);
 
         return $oldValue;
     }
@@ -193,7 +178,7 @@ class HashMap extends AbstractMap
      */
     public function count(): int
     {
-        return count($this->keys);
+        return count($this->elements);
     }
 
     /**
@@ -205,10 +190,10 @@ class HashMap extends AbstractMap
     public function keys(CollectionInterface $collection = null): CollectionInterface
     {
         if (null === $collection) {
-            return new ArrayList($this->keys);
+            return new ArrayList($this->getKeys());
         }
 
-        $collection->addAllArray($this->keys);
+        $collection->addAllArray($this->getKeys());
 
         return $collection;
     }
@@ -222,10 +207,10 @@ class HashMap extends AbstractMap
     public function values(CollectionInterface $collection = null): CollectionInterface
     {
         if (null === $collection) {
-            return new ArrayList($this->values);
+            return new ArrayList($this->getValues());
         }
 
-        $collection->addAllArray($this->values);
+        $collection->addAllArray($this->getValues());
 
         return $collection;
     }
@@ -270,5 +255,29 @@ class HashMap extends AbstractMap
             default:
                 return $type . md5($value);
         }
+    }
+
+    /**
+     * Returns an array of [@see MapEntry] keys
+     *
+     * @return array
+     */
+    private function getKeys()
+    {
+        return array_map(function (MapEntry $mapEntry) {
+            return $mapEntry->key;
+        }, $this->elements);
+    }
+
+    /**
+     * Returns an array of [@see MapEntry] values
+     *
+     * @return array
+     */
+    private function getValues()
+    {
+        return array_map(function (MapEntry $mapEntry) {
+            return $mapEntry->value;
+        }, $this->elements);
     }
 }
