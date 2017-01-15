@@ -33,6 +33,17 @@ class ArraySet extends AbstractSet
     }
 
     /**
+     * Returns true if the collection contains element
+     *
+     * @param mixed $element
+     * @return bool
+     */
+    public function contains($element): bool
+    {
+        return in_array($element, $this->elements, true);
+    }
+
+    /**
      * Ensure the element exists in the collection
      *
      * Returns true if the collection can contain duplicates,

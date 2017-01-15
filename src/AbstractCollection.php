@@ -47,17 +47,6 @@ abstract class AbstractCollection implements CollectionInterface
     }
 
     /**
-     * Returns true if the collection contains element
-     *
-     * @param mixed $element
-     * @return bool
-     */
-    public function contains($element): bool
-    {
-        return in_array($element, $this->toArray(), true);
-    }
-
-    /**
      * Returns true if the collection contains all elements from another collection
      *
      * @param CollectionInterface $collection
