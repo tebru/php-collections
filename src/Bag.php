@@ -55,7 +55,7 @@ class Bag extends AbstractCollection
      *
      * @return void
      */
-    public function clear()
+    public function clear(): void
     {
         $this->elements = [];
     }

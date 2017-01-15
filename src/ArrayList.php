@@ -77,7 +77,7 @@ class ArrayList extends AbstractList
      *
      * @return void
      */
-    public function clear()
+    public function clear(): void
     {
         $this->elements = [];
     }
@@ -110,7 +110,7 @@ class ArrayList extends AbstractList
      * @return void
      * @throws \OutOfBoundsException if the index doesn't exist
      */
-    public function insert(int $index, $element)
+    public function insert(int $index, $element): void
     {
         $this->assertIndex($index);
 
@@ -230,7 +230,7 @@ class ArrayList extends AbstractList
      * @return void
      * @throws \OutOfBoundsException If the index is less than 0 or greater than current size
      */
-    protected function assertIndex(int $index)
+    protected function assertIndex(int $index): void
     {
         if ($index < 0 || $index > $this->count()) {
             throw new OutOfBoundsException(sprintf('Element unable to be inserted at index "%s"', $index));

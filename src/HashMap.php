@@ -39,7 +39,7 @@ class HashMap extends AbstractMap
      *
      * @return void
      */
-    public function clear()
+    public function clear(): void
     {
         $this->elements = [];
     }
@@ -242,7 +242,7 @@ class HashMap extends AbstractMap
      *
      * @return array
      */
-    private function getKeys()
+    private function getKeys(): array
     {
         return array_map(function (MapEntry $mapEntry) {
             return $mapEntry->key;
@@ -254,7 +254,7 @@ class HashMap extends AbstractMap
      *
      * @return array
      */
-    private function getValues()
+    private function getValues(): array
     {
         return array_map(function (MapEntry $mapEntry) {
             return $mapEntry->value;

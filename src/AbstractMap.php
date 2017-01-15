@@ -21,7 +21,7 @@ abstract class AbstractMap implements MapInterface
      * @param MapInterface $map
      * @return void
      */
-    public function putAll(MapInterface $map)
+    public function putAll(MapInterface $map): void
     {
         /** @var MapEntry $entrySet */
         foreach ($map->entrySet() as $entrySet) {
@@ -35,7 +35,7 @@ abstract class AbstractMap implements MapInterface
      * @param array $map
      * @return void
      */
-    public function putAllArray(array $map)
+    public function putAllArray(array $map): void
     {
         /** @var MapEntry $entrySet */
         foreach ($map as $key => $value) {
@@ -52,7 +52,7 @@ abstract class AbstractMap implements MapInterface
      * @param callable $find
      * @return MapEntry|null
      */
-    public function find(callable $find)
+    public function find(callable $find): ?MapEntry
     {
         /** @var MapEntry $mapEntry */
         foreach ($this->entrySet() as $mapEntry) {

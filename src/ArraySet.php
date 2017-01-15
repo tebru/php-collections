@@ -7,7 +7,6 @@
 namespace Tebru\Collection;
 
 use ArrayIterator;
-use Traversable;
 
 /**
  * Class ArraySet
@@ -58,7 +57,7 @@ class ArraySet extends AbstractSet
      *
      * @return void
      */
-    public function clear()
+    public function clear(): void
     {
         $this->elements = [];
     }
@@ -94,12 +93,10 @@ class ArraySet extends AbstractSet
 
     /**
      * Retrieve an external iterator
-     * @link http://php.net/manual/en/iteratoraggregate.getiterator.php
-     * @return Traversable An instance of an object implementing <b>Iterator</b> or
-     * <b>Traversable</b>
-     * @since 5.0.0
+     *
+     * @return ArrayIterator
      */
-    public function getIterator()
+    public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->toArray());
     }

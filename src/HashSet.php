@@ -76,7 +76,7 @@ class HashSet extends AbstractSet
      *
      * @return void
      */
-    public function clear()
+    public function clear(): void
     {
         $this->map->clear();
     }

@@ -55,7 +55,7 @@ interface CollectionInterface extends IteratorAggregate, Countable
      *
      * @return void
      */
-    public function clear();
+    public function clear(): void;
 
     /**
      * Returns true if the collection contains element

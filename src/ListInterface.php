@@ -31,7 +31,7 @@ interface ListInterface extends CollectionInterface
      * @param mixed $element
      * @return void
      */
-    public function insert(int $index, $element);
+    public function insert(int $index, $element): void;
 
     /**
      * All all elements of collection to end of list

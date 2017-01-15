@@ -22,7 +22,7 @@ interface MapInterface extends Countable
      *
      * @return void
      */
-    public function clear();
+    public function clear(): void;
 
     /**
      * Returns true if the key exists in the map
@@ -92,7 +92,7 @@ interface MapInterface extends Countable
      * @param MapInterface $map
      * @return void
      */
-    public function putAll(MapInterface $map);
+    public function putAll(MapInterface $map): void;
 
     /**
      * Adds all the mappings from specified array to this map
@@ -100,7 +100,7 @@ interface MapInterface extends Countable
      * @param array $map
      * @return void
      */
-    public function putAllArray(array $map);
+    public function putAllArray(array $map): void;
 
     /**
      * Remove the mapping for the key and returns the previous value
@@ -153,7 +153,7 @@ interface MapInterface extends Countable
      * @param callable $find
      * @return MapEntry|null
      */
-    public function find(callable $find);
+    public function find(callable $find): ?MapEntry;
 
     /**
      * Use a closure to determine existence in the map
