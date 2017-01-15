@@ -83,11 +83,13 @@ class ArraySet extends AbstractSet
      */
     public function remove($element): bool
     {
-        if (!$this->contains($element)) {
+        $index = array_search($element, $this->elements, true);
+
+        if (false === $index) {
             return false;
         }
 
-        unset($this->elements[array_search($element, $this->elements, true)]);
+        array_splice($this->elements, $index, 1);
 
         return true;
     }
@@ -99,7 +101,7 @@ class ArraySet extends AbstractSet
      */
     public function toArray(): array
     {
-        return array_values($this->elements);
+        return $this->elements;
     }
 
     /**
