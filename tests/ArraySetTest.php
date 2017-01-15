@@ -7,26 +7,26 @@
 namespace Tebru\Collection\Test;
 
 use PHPUnit_Framework_TestCase;
-use Tebru\Collection\HashSet;
+use Tebru\Collection\ArraySet;
 
 /**
- * Class HashSetTest
+ * Class ArraySetTest
  *
  * @author Nate Brunette <n@tebru.net>
  *
- * @covers \Tebru\Collection\HashSet
+ * @covers \Tebru\Collection\ArraySet
  */
-class HashSetTest extends PHPUnit_Framework_TestCase 
+class ArraySetTest extends PHPUnit_Framework_TestCase
 {
     public function testConstructWithoutArgument()
     {
-        self::assertInstanceOf(HashSet::class, new HashSet());
+        self::assertInstanceOf(ArraySet::class, new ArraySet());
     }
 
     public function testConstructWithElements()
     {
         $elements = [1, false, null, new \stdClass()];
-        $collection = new HashSet($elements);
+        $collection = new ArraySet($elements);
 
         self::assertCount(4, $collection);
         self::assertSame($elements[0], $collection->toArray()[0]);
@@ -37,7 +37,7 @@ class HashSetTest extends PHPUnit_Framework_TestCase
 
     public function testConstructWithAssociativeArray()
     {
-        $collection = new HashSet(['foo' => 'bar']);
+        $collection = new ArraySet(['foo' => 'bar']);
 
         self::assertCount(1, $collection);
         self::assertSame('bar', $collection->toArray()[0]);

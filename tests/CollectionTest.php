@@ -9,6 +9,7 @@ namespace Tebru\Collection\Test;
 use PHPUnit_Framework_TestCase;
 use stdClass;
 use Tebru\Collection\ArrayList;
+use Tebru\Collection\ArraySet;
 use Tebru\Collection\Bag;
 use Tebru\Collection\CollectionInterface;
 use Tebru\Collection\HashSet;
@@ -22,6 +23,7 @@ use Tebru\Collection\HashSet;
  * @covers \Tebru\Collection\ArrayList
  * @covers \Tebru\Collection\Bag
  * @covers \Tebru\Collection\HashSet
+ * @covers \Tebru\Collection\ArraySet
  */
 class CollectionTest extends PHPUnit_Framework_TestCase
 {
@@ -412,6 +414,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
             [new ArrayList()],
             [new Bag()],
             [new HashSet()],
+            [new ArraySet()],
         ];
     }
 }

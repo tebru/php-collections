@@ -6,7 +6,6 @@
 
 namespace Tebru\Collection\Test;
 
-use OutOfRangeException;
 use PHPUnit_Framework_TestCase;
 use stdClass;
 use Tebru\Collection\ArrayList;

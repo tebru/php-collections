@@ -6,8 +6,6 @@
 
 namespace Tebru\Collection;
 
-use OutOfBoundsException;
-
 /**
  * Class AbstractList
  *

@@ -67,7 +67,7 @@ interface MapInterface extends Countable
     public function isEmpty(): bool;
 
     /**
-     * Returns a set of they keys in the map
+     * Returns a set of the keys in the map
      *
      * If a set is passed in, that set will be populated, otherwise
      * a default set will be used.
