@@ -20,7 +20,7 @@ class ArraySet extends AbstractSet
      *
      * @var array
      */
-    private $elements = [];
+    protected $elements = [];
 
     /**
      * Constructor
