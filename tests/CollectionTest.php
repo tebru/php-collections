@@ -13,6 +13,7 @@ use Tebru\Collection\ArraySet;
 use Tebru\Collection\Bag;
 use Tebru\Collection\CollectionInterface;
 use Tebru\Collection\HashSet;
+use Tebru\Collection\LinkedList;
 
 /**
  * Class CollectionTest
@@ -24,6 +25,7 @@ use Tebru\Collection\HashSet;
  * @covers \Tebru\Collection\Bag
  * @covers \Tebru\Collection\HashSet
  * @covers \Tebru\Collection\ArraySet
+ * @covers \Tebru\Collection\LinkedList
  */
 class CollectionTest extends PHPUnit_Framework_TestCase
 {
@@ -415,6 +417,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
             [new Bag()],
             [new HashSet()],
             [new ArraySet()],
+            [new LinkedList()],
         ];
     }
 }

@@ -7,9 +7,7 @@
 namespace Tebru\Collection\Test;
 
 use PHPUnit_Framework_TestCase;
-use Tebru\Collection\ArrayList;
 use Tebru\Collection\Bag;
-use Tebru\Collection\CollectionInterface;
 
 /**
  * Class BagTest

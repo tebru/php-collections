@@ -9,6 +9,7 @@ namespace Tebru\Collection\Test;
 use OutOfBoundsException;
 use PHPUnit_Framework_TestCase;
 use Tebru\Collection\ArrayList;
+use Tebru\Collection\LinkedList;
 use Tebru\Collection\ListInterface;
 
 /**
@@ -18,6 +19,7 @@ use Tebru\Collection\ListInterface;
  *
  * @covers \Tebru\Collection\AbstractList
  * @covers \Tebru\Collection\ArrayList
+ * @covers \Tebru\Collection\LinkedList
  */
 class ListTest extends PHPUnit_Framework_TestCase
 {
@@ -346,6 +348,7 @@ class ListTest extends PHPUnit_Framework_TestCase
     {
         return [
             [new ArrayList()],
+            [new LinkedList()],
         ];
     }
 }
