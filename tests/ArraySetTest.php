@@ -6,7 +6,7 @@
 
 namespace Tebru\Collection\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Tebru\Collection\ArraySet;
 
 /**
@@ -16,7 +16,7 @@ use Tebru\Collection\ArraySet;
  *
  * @covers \Tebru\Collection\ArraySet
  */
-class ArraySetTest extends PHPUnit_Framework_TestCase
+class ArraySetTest extends TestCase
 {
     public function testConstructWithoutArgument()
     {

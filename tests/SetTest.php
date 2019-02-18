@@ -6,7 +6,7 @@
 
 namespace Tebru\Collection\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Tebru\Collection\ArrayList;
 use Tebru\Collection\ArraySet;
 use Tebru\Collection\HashSet;
@@ -19,7 +19,7 @@ use Tebru\Collection\SetInterface;
  * @covers \Tebru\Collection\HashSet
  * @covers \Tebru\Collection\ArraySet
  */
-class SetTest extends PHPUnit_Framework_TestCase
+class SetTest extends TestCase
 {
     /**
      * @dataProvider getSets

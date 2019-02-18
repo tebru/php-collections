@@ -6,7 +6,7 @@
 
 namespace Tebru\Collection\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use stdClass;
 use Tebru\Collection\ArrayList;
 use Tebru\Collection\HashMap;
@@ -23,7 +23,7 @@ use Tebru\Collection\MapInterface;
  * @covers \Tebru\Collection\HashMap
  * @covers \Tebru\Collection\MapEntry
  */
-class MapTest extends PHPUnit_Framework_TestCase
+class MapTest extends TestCase
 {
     /**
      * @dataProvider getMaps
@@ -31,7 +31,7 @@ class MapTest extends PHPUnit_Framework_TestCase
      */
     public function testPutAll(MapInterface $map)
     {
-        $classKey = new \stdClass();
+        $classKey = new stdClass();
         $hashMap = new HashMap();
         $hashMap->put($classKey, true);
         $hashMap->put('key', false);
@@ -301,7 +301,7 @@ class MapTest extends PHPUnit_Framework_TestCase
      */
     public function testPutObject(MapInterface $map)
     {
-        $class = new \stdClass();
+        $class = new stdClass();
         $map->put($class, 'value');
 
         $mapEntry = $map->entrySet()->toArray()[0];
@@ -316,8 +316,8 @@ class MapTest extends PHPUnit_Framework_TestCase
      */
     public function testPutMultipleObject(MapInterface $map)
     {
-        $class = new \stdClass();
-        $class2 = new \stdClass();
+        $class = new stdClass();
+        $class2 = new stdClass();
         $map->put($class, 'value');
 
         self::assertCount(1, $map);
