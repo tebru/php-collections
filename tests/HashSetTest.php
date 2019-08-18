@@ -6,7 +6,7 @@
 
 namespace Tebru\Collection\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Tebru\Collection\HashSet;
 
 /**
@@ -16,7 +16,7 @@ use Tebru\Collection\HashSet;
  *
  * @covers \Tebru\Collection\HashSet
  */
-class HashSetTest extends PHPUnit_Framework_TestCase 
+class HashSetTest extends TestCase
 {
     public function testConstructWithoutArgument()
     {

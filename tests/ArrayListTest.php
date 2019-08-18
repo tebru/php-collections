@@ -6,7 +6,7 @@
 
 namespace Tebru\Collection\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Tebru\Collection\ArrayList;
 use Tebru\Collection\CollectionInterface;
 
@@ -17,7 +17,7 @@ use Tebru\Collection\CollectionInterface;
  *
  * @covers \Tebru\Collection\ArrayList
  */
-class ArrayListTest extends PHPUnit_Framework_TestCase
+class ArrayListTest extends TestCase
 {
     public function testConstructWithoutArgument()
     {

@@ -7,7 +7,7 @@
 namespace Tebru\Collection\Test;
 
 use OutOfBoundsException;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Tebru\Collection\ArrayList;
 use Tebru\Collection\ListInterface;
 
@@ -19,7 +19,7 @@ use Tebru\Collection\ListInterface;
  * @covers \Tebru\Collection\AbstractList
  * @covers \Tebru\Collection\ArrayList
  */
-class ListTest extends PHPUnit_Framework_TestCase
+class ListTest extends TestCase
 {
     /**
      * @dataProvider getLists
@@ -95,6 +95,7 @@ class ListTest extends PHPUnit_Framework_TestCase
     public function testInsertException(ListInterface $list)
     {
         $this->expectException(OutOfBoundsException::class);
+        $this->expectExceptionMessage('Element unable to be inserted at index "1"');
 
         $list->insert(1, 1);
     }
@@ -138,6 +139,7 @@ class ListTest extends PHPUnit_Framework_TestCase
     public function testInsertAllException(ListInterface $list)
     {
         $this->expectException(OutOfBoundsException::class);
+        $this->expectExceptionMessage('Element unable to be inserted at index "-1"');
 
         $list->insertAll(-1, new ArrayList());
     }
@@ -160,6 +162,7 @@ class ListTest extends PHPUnit_Framework_TestCase
     public function testGetException(ListInterface $list)
     {
         $this->expectException(OutOfBoundsException::class);
+        $this->expectExceptionMessage('Tried to access element at index "-1"');
 
         $list->add(1);
         $list->get(-1);
@@ -253,6 +256,7 @@ class ListTest extends PHPUnit_Framework_TestCase
     public function testRemoveAtException(ListInterface $list)
     {
         $this->expectException(OutOfBoundsException::class);
+        $this->expectExceptionMessage('Tried to access element at index "1"');
 
         $list->add(1);
         $list->removeAt(1);
@@ -290,7 +294,7 @@ class ListTest extends PHPUnit_Framework_TestCase
     public function testSetException(ListInterface $list)
     {
         $this->expectException(OutOfBoundsException::class);
-
+        $this->expectExceptionMessage('Element unable to be inserted at index "1"');
         $list->set(1, 1);
     }
 
@@ -325,6 +329,7 @@ class ListTest extends PHPUnit_Framework_TestCase
     public function testSubListFromOutOfBounds(ListInterface $list)
     {
         $this->expectException(OutOfBoundsException::class);
+        $this->expectExceptionMessage('Unable to create sub list as $toIndex or $fromIndex do not exist in list');
 
         $list->addAll(new ArrayList([0, 1, 2]));
         $list->subList(0, 4);
@@ -337,6 +342,7 @@ class ListTest extends PHPUnit_Framework_TestCase
     public function testSubListToOutOfBounds(ListInterface $list)
     {
         $this->expectException(OutOfBoundsException::class);
+        $this->expectExceptionMessage('Unable to create sub list as $toIndex or $fromIndex do not exist in list');
 
         $list->addAll(new ArrayList([0, 1, 2]));
         $list->subList(-1, 1);

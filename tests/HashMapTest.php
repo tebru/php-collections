@@ -6,7 +6,7 @@
 
 namespace Tebru\Collection\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Tebru\Collection\HashMap;
 
 /**
@@ -14,7 +14,7 @@ use Tebru\Collection\HashMap;
  *
  * @author Nate Brunette <n@tebru.net>
  */
-class HashMapTest extends PHPUnit_Framework_TestCase
+class HashMapTest extends TestCase
 {
     public function testConstructWithArguments()
     {

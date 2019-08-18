@@ -6,7 +6,7 @@
 
 namespace Tebru\Collection\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use stdClass;
 use Tebru\Collection\ArrayList;
 use Tebru\Collection\CollectionInterface;
@@ -20,7 +20,7 @@ use Tebru\Collection\Test\Mock\ModifiedHashSet;
  *
  * @author Nate Brunette <n@tebru.net>
  */
-class ModifiedHashSetTest extends PHPUnit_Framework_TestCase
+class ModifiedHashSetTest extends TestCase
 {
     /**
      * @dataProvider getCollections

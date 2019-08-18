@@ -6,7 +6,7 @@
 
 namespace Tebru\Collection\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Tebru\Collection\ArrayList;
 use Tebru\Collection\Bag;
 use Tebru\Collection\CollectionInterface;
@@ -18,7 +18,7 @@ use Tebru\Collection\CollectionInterface;
  *
  * @covers \Tebru\Collection\Bag
  */
-class BagTest extends PHPUnit_Framework_TestCase
+class BagTest extends TestCase
 {
     public function testConstructWithoutArgument()
     {
