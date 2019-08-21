@@ -12,3 +12,5 @@ before_script:
 script:
   - mkdir -p build/logs
   - vendor/bin/phpunit
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
